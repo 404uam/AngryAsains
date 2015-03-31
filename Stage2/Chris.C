@@ -1,0 +1,115 @@
+#include <osbind.h>
+
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 400
+
+typedef unsigned long UINT32;
+
+void plot_bitmap_32(UINT32 *base, int x, int y, const UINT32 *bitmap, unsigned int height);
+
+#define CHOPSTICKS_MOVING_LEFT 128
+
+const UINT32 chopsticks_moving_left_bitmap[CHOPSTICKS_MOVING_LEFT] =
+{
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF,
+	0xFFFFFFFF,0xFFFFFFFF
+};
+
+int main() {
+	UINT32 *base = Physbase();
+	int x, y;
+
+	plot_bitmap_32(base, 0, 0, chopsticks_moving_left_bitmap, CHOPSTICKS_MOVING_LEFT);
+
+	return 0;
+}
+
+void plot_bitmap_32(UINT32 *base, int x, int y, const UINT32 *bitmap, unsigned int height) {
+	int i;
+	int offset = x % 32;
+	int offset2 = (x + 32) % 32;
+
+	base += (y * 20) + (x / 32);
+
+	if(x >= 0 && (x + 1) < SCREEN_WIDTH && y >= 0 && (y + height) < SCREEN_HEIGHT) {
+		for(i = 0;i < height;i++) {
+			if(i % 2 == 0) {
+				*(base + (i * 20)) ^= bitmap[i] >> offset;
+				if(offset > 0) {
+					base++;
+					*(base + (i * 20)) ^= bitmap[i] << (31 - offset);
+					base--;
+				}
+			} else {
+				*(base + (i * 20)) ^= bitmap[i] >> offset2;
+				if(offset2 > 0) {
+					base++;
+					*(base + (i * 20)) ^= bitmap[i] << (31 - offset2);
+					base--;
+				}
+			}
+		}
+	}
+}
