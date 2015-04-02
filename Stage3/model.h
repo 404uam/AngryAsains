@@ -5,7 +5,7 @@
 #define false -1
 
 struct Asian{
-	unsigned int x,y,lives;
+	unsigned int x;
 	int speed;
 	bool canThrow;
 	int hor_delta;
@@ -13,7 +13,8 @@ struct Asian{
 };
 
 struct Obstruction{
-	unsigned int x,y;
+	int x;
+	int y;
 };
 
 struct Chopsticks{
