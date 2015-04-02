@@ -30,4 +30,6 @@ void asainMoveRight(struct Asian *asain);
 void asianMoveLeft(struct Asian *asian);
 void asianMoveUp(struct Asian *asian);
 void asianMoveDown(struct Asian *asian);
+void asianMoveModel(struct Asian *asian);
+
 #endif
