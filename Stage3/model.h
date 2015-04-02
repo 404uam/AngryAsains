@@ -25,5 +25,6 @@ struct PlayerInfo{
 	unsigned int x,y;
 };
 
-
+void resetAsianDeltas(struct Asian *asian);
+void asainMoveRight(struct Asian *asain);
 #endif
