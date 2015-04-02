@@ -5,7 +5,7 @@
 #define false -1
 
 struct Asian{
-	unsigned int x;
+	unsigned int x,y,lives;
 	int speed;
 	bool canThrow;
 	int hor_delta;

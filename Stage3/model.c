@@ -1,15 +1,29 @@
 #include "model.h"
 #include <stdio.h>
-
+void initilizeAsian(struct Asian *asian);
 int main()
 {
-	/*struct Asian *asian1 = {0,0,0,true,0,0};*/
-	struct obstruction obs1 = {1,2};
-
+	struct Asian asian1;
+	/*struct obstruction obs1 = {1,2};*/
+	
+	initilizeAsian(&asian1);
+	printf("%i,\n",asian1.lives);
 	/*resetAsianDeltas(asian1);*/
-	/*printf("%i",asian1->hor_delta);*/
+	
 
 return 0;
+}
+void initilizeAsian(struct Asian *asian)
+{
+	asian->x = 0;
+	asian->y = 0;
+	asian->lives = 3;
+	asian->speed = 1;
+	asian->canThrow = true;
+	asian->hor_delta = 0;
+	asian->hor_delta = 0;
+	
+	return;
 }
 
 void resetAsianDeltas(struct Asian *asian)
