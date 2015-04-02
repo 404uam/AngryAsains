@@ -22,3 +22,24 @@ void asainMoveRight(struct Asian *asian)
 	
 	return;
 }
+
+void asianMoveLeft(struct Asian *asian)
+{
+	asian->hor_delta = -1;
+	
+	return;
+}
+
+void asianMoveUp(struct Asian *asian)
+{
+	asian->ver_delta = 1;
+	
+	return;
+}
+
+void asianMoveDown(struct Asian *asian)
+{
+	asian->ver_delta = -1;
+	
+	return;
+}

@@ -27,4 +27,7 @@ struct PlayerInfo{
 
 void resetAsianDeltas(struct Asian *asian);
 void asainMoveRight(struct Asian *asain);
+void asianMoveLeft(struct Asian *asian);
+void asianMoveUp(struct Asian *asian);
+void asianMoveDown(struct Asian *asian);
 #endif
