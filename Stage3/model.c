@@ -3,8 +3,7 @@
 void initilizeAsian(struct Asian *asian);
 int main()
 {
-	struct Asian asian1;
-	/*struct obstruction obs1 = {1,2};*/
+	struct Asian asian1 = {0,0,3,1,true,0,0};
 	
 	initilizeAsian(&asian1);
 	printf("%i,\n",asian1.lives);
