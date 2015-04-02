@@ -1,9 +1,13 @@
 #include "model.h"
+#include <stdio.h>
 
 int main()
 {
+	/*struct Asian *asian1 = {0,0,0,true,0,0};*/
+	struct obstruction obs1 = {1,2};
 
-
+	/*resetAsianDeltas(asian1);*/
+	/*printf("%i",asian1->hor_delta);*/
 
 return 0;
 }
@@ -43,3 +47,15 @@ void asianMoveDown(struct Asian *asian)
 	
 	return;
 }
+
+void asianMoveModel(struct Asian *asian)
+{
+	asian->x += asian->hor_delta;
+	asian->y += asian->ver_delta;
+	
+	resetAsianDeltas(asian);
+	
+	/* TODO COLLISION DETECTION */
+	
+}
+
