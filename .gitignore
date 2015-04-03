@@ -4,3 +4,4 @@ Stage3/A.OUT
 *.OUT
 *.OUT
 Stage3/A.OUT
+*.o
