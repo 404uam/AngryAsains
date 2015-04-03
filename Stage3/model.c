@@ -3,8 +3,10 @@
 void initilizeAsian(struct Asian *asian);
 int main()
 {
-	struct Asian asian1 = {0,0,5,1,true,1,-1};
-	struct Asian asian2 = {639,399,5,1,true,1,-1};
+
+	/*struct Asian asian2 = {639,399,5,1,true,1,-1};*/
+	struct Chopstick chopsticks[3] = {{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}};
+	struct Asian asian1 = {0,0,5,1,true,1,-1,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}};
 	struct Obstruction obs1[3] = {{40,40},{40,60},{40,80}};
 	struct Obstruction obs2[3] = {{340,40},{340,60},{340,80}};
 	struct PlayerInfo pi = {0,368};
@@ -12,8 +14,8 @@ int main()
 	printf("%i,\n",asian1.hor_delta);
 	printf("%i,\n",asian1.ver_delta);
 	resetAsianDeltas(&asian1);
-	printf("%i,\n",asian2.hor_delta);
-	printf("%i,\n",asian2.ver_delta);
+	/*printf("%i,\n",asian2.hor_delta);*/
+/* 	printf("%i,\n",asian2.ver_delta);*/	
 	printf("%i,\n",obs1[2].y);
 
 	return 0;
@@ -78,7 +80,7 @@ void asianThrowChopstick(struct Asian *asian)
 		{
 			if( asian->chopsticks[i].isThrown == false)
 			{
-				spawnChopstick(asian->chopsticks[i],asian);
+				spawnChopstick(&asian->chopsticks[i],asian);
 				canThrow = true;
 			}
 		}

@@ -4,6 +4,13 @@
 #define true 1
 #define false -1
 
+struct Chopstick{
+	unsigned int x,y;
+	int direction;
+	int speed;
+	bool isThrown;
+};
+
 struct Asian{
 	unsigned int x,y,lives;
 	int speed;
@@ -15,13 +22,6 @@ struct Asian{
 
 struct Obstruction{
 	unsigned int x,y;
-};
-
-struct Chopstick{
-	unsigned int x,y;
-	int direction;
-	int speed;
-	bool isThrown;
 };
 
 struct PlayerInfo{
