@@ -1,4 +1,5 @@
 #ifndef	MODEL_H
+#include "types.h"
 #define RASTER_H
 #define bool int
 #define true 1
