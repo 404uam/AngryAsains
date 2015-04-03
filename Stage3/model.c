@@ -1,6 +1,18 @@
+/*
+Name: Model.c
+Team: Louis, Chris
+Author: Louis Mau
+Purpose: Function declaration for the model. Functions for the Asians and chopsticks.
+		Asians moving(collision detecting) and resetting deltas functions
+		Chopsticks moving and collision detecting
+*/
 #include "model.h"
 #include <stdio.h>
 
+/*
+Name: resetAsianDeltas()
+Purpose: reset the deltas of the Asian after moving.
+*/
 void resetAsianDeltas(struct Asian *asian)
 {
 	asian->hor_delta = 0;
@@ -8,35 +20,50 @@ void resetAsianDeltas(struct Asian *asian)
 	
 	return;
 }
-
+/*
+Name: asianMoveRight
+Purpose: changes the delta for the asian to move right ->
+*/
 void asianMoveRight(struct Asian *asian)
 {
 	asian->hor_delta = 1;
 	
 	return;
 }
-
+/*
+Name: asianMoveLeft
+Purpose: changes the delta for the asian to move left <-
+*/
 void asianMoveLeft(struct Asian *asian)
 {
 	asian->hor_delta = -1;
 	
 	return;
 }
-
+/*
+Name: asianMoveUp
+Purpose: change the delta for the asian to move up ^
+*/
 void asianMoveUp(struct Asian *asian)
 {
 	asian->ver_delta = 1;
 	
 	return;
 }
-
+/*
+Name: asianMoveDown
+Purpose: change the delta for the asian to move down v
+*/
 void asianMoveDown(struct Asian *asian)
 {
 	asian->ver_delta = -1;
 	
 	return;
 }
-
+/*
+Name: asianMoveModel
+Purpose: actually update the model by adding the deltas
+*/
 void asianMoveModel(struct Asian *asian)
 {
 	asian->x += asian->hor_delta;
@@ -48,7 +75,10 @@ void asianMoveModel(struct Asian *asian)
 		
 	return;
 }
-
+/*
+Name: asianThrowChopstick
+Purpose: 
+*/
 void asianThrowChopstick(struct Asian *asian)
 {
 	int i;
