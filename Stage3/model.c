@@ -5,23 +5,10 @@ int main()
 {
 	struct Asian asian1 = {0,0,5,1,true,0,0};
 	
-	initilizeAsian(&asian1);
 	printf("%i,\n",asian1.lives);
 	/*resetAsianDeltas(asian1);*/
 
 	return 0;
-}
-void initilizeAsian(struct Asian *asian)
-{
-	asian->x = 0;
-	asian->y = 0;
-	asian->lives = 3;
-	asian->speed = 1;
-	asian->canThrow = true;
-	asian->hor_delta = 0;
-	asian->hor_delta = 0;
-	
-	return;
 }
 
 void resetAsianDeltas(struct Asian *asian)
