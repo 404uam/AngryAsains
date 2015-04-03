@@ -33,10 +33,11 @@ struct Model
 {
 	struct Asian asian1;
 	struct Asian asian2;
-	struct Obstruction obstructions1[3];
-	struct Obstruction obsturctions2[3];
+	struct Obstruction obs1[3];
+	struct Obstruction obs2[3];
 	struct PlayerInfo pi;
 };
+typedef struct Model modelType;
 
 void resetAsianDeltas(struct Asian *asian);
 void asianMoveRight(struct Asian *asian);
