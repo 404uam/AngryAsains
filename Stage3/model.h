@@ -17,8 +17,9 @@ struct Obstruction{
 	int y;
 };
 
-struct Chopsticks{
+struct Chopstick{
 	unsigned int x,y;
+	int direction;
 	int speed;
 };
 
@@ -27,10 +28,12 @@ struct PlayerInfo{
 };
 
 void resetAsianDeltas(struct Asian *asian);
-void asainMoveRight(struct Asian *asain);
+void asainMoveRight(struct Asian *asian);
 void asianMoveLeft(struct Asian *asian);
 void asianMoveUp(struct Asian *asian);
 void asianMoveDown(struct Asian *asian);
 void asianMoveModel(struct Asian *asian);
+
+void chopstickMove(struct Chopstick *chopstick);
 
 #endif

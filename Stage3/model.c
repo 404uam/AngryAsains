@@ -30,7 +30,7 @@ void asainMoveRight(struct Asian *asian)
 }
 
 void asianMoveLeft(struct Asian *asian)
-{
+{3
 	asian->hor_delta = -1;
 	
 	return;
@@ -59,5 +59,12 @@ void asianMoveModel(struct Asian *asian)
 	
 	/* TODO COLLISION DETECTION */
 	
+}
+
+void chopstickMove(struct Chopstick *chopstick)
+{
+	chopstick->x += chopstick->direction;
+	
+	return;
 }
 
