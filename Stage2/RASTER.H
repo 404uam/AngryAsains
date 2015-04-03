@@ -2,6 +2,7 @@
 #define RASTER_H
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 400
+#define BITMAP32 128
 
 #define SOLID  0xFFFF
 #define DASHED 0xF0F0
@@ -10,6 +11,8 @@
 
 #include <osbind.h>
 #include "types.h"
+
+extern const UINT32 chopsticks_moving_left_bitmap[BITMAP32];
 
 void plot_pixel(UINT8 *base, int x, int y);
 void plot_ver_line(UINT8 *base,int x, int y, int length);

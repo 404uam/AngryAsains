@@ -78,16 +78,16 @@ void asianMoveModel(struct Asian *asian)
 void asianThrowChopstick(struct Asian *asian)
 {
 	int i;
-	bool canThrow = false;
+	bool canThrowChop = false;
 	if(asian->canThrow == true)
 	{
 		asian->canThrow = false;
-		while(i<3 && canThrow == false)
+		while(i<3 && canThrowChop == false)
 		{
 			if( asian->chopsticks[i].isThrown == false)
 			{
 				spawnChopstick(&asian->chopsticks[i],asian);
-				canThrow = true;
+				canThrowChop = true;
 			}
 		}
 	}
@@ -103,11 +103,15 @@ void spawnChopstick(struct Chopstick *chopstick,struct Asian *asian)
 	
 	return;
 }
+
 void chopstickMove(struct Chopstick *chopstick)
 {
 	chopstick->x += chopstick->direction;
 	
 	/* Collision detection todo*/
+	/*Peusdo code*/
+	/* if collide with anything ...*/
+	/* set isThrown to false so you can use it again */
 	return;
 }
 
