@@ -27,7 +27,7 @@ void resetAsianDeltas(struct Asian *asian)
 	return;
 }
 
-void asainMoveRight(struct Asian *asian)
+void asiannMoveRight(struct Asian *asian)
 {
 	asian->hor_delta = 1;
 	
@@ -64,8 +64,37 @@ void asianMoveModel(struct Asian *asian)
 	
 	/* TODO COLLISION DETECTION */
 		
+	return;
 }
 
+void asianThrowChopstick(struct Asian *asian)
+{
+	int i;
+	bool canThrow = false;
+	if(asian->canThrow == true)
+	{
+		asian->canThrow = false;
+		while(i<3 && canThrow == false)
+		{
+			if( asian->chopsticks[i].isThrown == false)
+			{
+				spawnChopstick(asian->chopsticks[i],asian);
+				canThrow = true;
+			}
+		}
+	}
+	
+	return;
+}
+
+void spawnChopstick(struct Chopstick *chopstick,struct Asian *asian)
+{
+	chopstick->x = asian->x;
+	chopstick->y = asian->y;
+	chopstick->isThrown = true;
+	
+	return;
+}
 void chopstickMove(struct Chopstick *chopstick)
 {
 	chopstick->x += chopstick->direction;

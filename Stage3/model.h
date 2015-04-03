@@ -38,13 +38,15 @@ struct Model
 };
 
 void resetAsianDeltas(struct Asian *asian);
-void asainMoveRight(struct Asian *asian);
+void asianMoveRight(struct Asian *asian);
 void asianMoveLeft(struct Asian *asian);
 void asianMoveUp(struct Asian *asian);
 void asianMoveDown(struct Asian *asian);
 void asianMoveModel(struct Asian *asian);
 void asianThrowChopstick(struct Asian *asian);
 
+void spawnChopstick(struct Chopstick *chopstick, struct Asian *asian);
 void chopstickMove(struct Chopstick *chopstick);
+
 
 #endif
