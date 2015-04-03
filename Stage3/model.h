@@ -6,14 +6,14 @@
 #define false -1
 
 struct Chopstick{
-	unsigned int x,y;
+	UINT16 x,y;
 	int direction;
 	int speed;
 	bool isThrown;
 };
 
 struct Asian{
-	unsigned int x,y,lives;
+	UINT16 x,y,lives;
 	int speed;
 	bool canThrow;
 	int hor_delta;
@@ -22,11 +22,11 @@ struct Asian{
 };
 
 struct Obstruction{
-	unsigned int x,y;
+	UINT16 x,y;
 };
 
 struct PlayerInfo{
-	unsigned int x,y;
+	UINT16 x,y;
 };
 
 struct Model
