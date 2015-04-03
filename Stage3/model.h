@@ -13,18 +13,29 @@ struct Asian{
 };
 
 struct Obstruction{
-	int x;
-	int y;
+	unsigned int x,y;
 };
 
 struct Chopstick{
 	unsigned int x,y;
 	int direction;
 	int speed;
+	bool isThrown;
 };
 
 struct PlayerInfo{
 	unsigned int x,y;
+};
+
+struct Model
+{
+	struct Asian asian1;
+	struct Asian asian2;
+	struct Chopstick chopsticks1[3];
+	struct Chopstick chopsticks2[3];
+	struct Obstruction obstructions1[3];
+	struct Obstruction obsturctions2[3];
+	struct PlayerInfo pi;
 };
 
 void resetAsianDeltas(struct Asian *asian);
