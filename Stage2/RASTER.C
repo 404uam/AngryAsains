@@ -1,5 +1,23 @@
 #include "raster.h"
 
+const UINT32 chopsticks_moving_left_bitmap[15] = {
+0x0000,
+0x0000,
+0x0000,
+0x0000,
+0x0000,
+0x000C,
+0x7F0C,
+0x7F20,
+0x0002,
+0x0000,
+0x0000,
+0x0000,
+0x0000,
+0x0000,
+0x0000,
+};
+
 void plot_pixel(UINT8 *base, int x, int y)
 {
 	if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT)

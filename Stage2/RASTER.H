@@ -12,7 +12,7 @@
 #include <osbind.h>
 #include "types.h"
 
-extern const UINT32 chopsticks_moving_left_bitmap[BITMAP32];
+extern const UINT32 chopsticks_moving_left_bitmap[15];
 
 void plot_pixel(UINT8 *base, int x, int y);
 void plot_ver_line(UINT8 *base,int x, int y, int length);
