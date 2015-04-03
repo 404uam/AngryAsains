@@ -14,6 +14,7 @@ int main()
 	resetAsianDeltas(&asian1);
 	printf("%i,\n",asian2.hor_delta);
 	printf("%i,\n",asian2.ver_delta);
+	printf("%i,\n",obs1[2].y);
 
 	return 0;
 }

@@ -10,6 +10,7 @@ struct Asian{
 	bool canThrow;
 	int hor_delta;
 	int ver_delta;
+	struct Chopstick chopsticks[3];
 };
 
 struct Obstruction{
@@ -31,8 +32,6 @@ struct Model
 {
 	struct Asian asian1;
 	struct Asian asian2;
-	struct Chopstick chopsticks1[3];
-	struct Chopstick chopsticks2[3];
 	struct Obstruction obstructions1[3];
 	struct Obstruction obsturctions2[3];
 	struct PlayerInfo pi;
@@ -44,6 +43,7 @@ void asianMoveLeft(struct Asian *asian);
 void asianMoveUp(struct Asian *asian);
 void asianMoveDown(struct Asian *asian);
 void asianMoveModel(struct Asian *asian);
+void asianThrowChopstick(struct Asian *asian);
 
 void chopstickMove(struct Chopstick *chopstick);
 
