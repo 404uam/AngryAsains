@@ -3,10 +3,13 @@
 void initilizeAsian(struct Asian *asian);
 int main()
 {
-	struct Asian asian1 = {0,0,5,1,true,0,0};
+	struct Asian asian1 = {0,0,5,1,true,1,-1};
 	
-	printf("%i,\n",asian1.lives);
-	/*resetAsianDeltas(asian1);*/
+	printf("%i,\n",asian1.hor_delta);
+	printf("%i,\n",asian1.ver_delta);
+	resetAsianDeltas(&asian1);
+	printf("%i,\n",asian1.hor_delta);
+	printf("%i,\n",asian1.ver_delta);
 
 	return 0;
 }
