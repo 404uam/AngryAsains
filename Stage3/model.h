@@ -1,9 +1,11 @@
 #ifndef	MODEL_H
 #include "types.h"
+
 #define RASTER_H
 #define bool int
 #define true 1
 #define false -1
+#define MIDDLEOFSCREEN 300
 
 struct Chopstick{
 	UINT16 x,y;

@@ -66,18 +66,22 @@ Purpose: actually update the model by adding the deltas
 */
 void asianMoveModel(struct Asian *asian)
 {
+	/* TODO COLLISION DETECTION */
+	if(asian->x + asian->hor_delta > (MIDDLEOFSCREEN-32))
+	{
+		resetAsianDeltas(asian);
+	}
 	asian->x += asian->hor_delta;
 	asian->y += asian->ver_delta;
 	
 	resetAsianDeltas(asian);
 	
-	/* TODO COLLISION DETECTION */
-		
+
 	return;
 }
 /*
 Name: asianThrowChopstick
-Purpose: 
+Purpose: Asian will throw the chopstick and have the checks if there are any available chopsticks to throw.
 */
 void asianThrowChopstick(struct Asian *asian)
 {
@@ -98,6 +102,10 @@ void asianThrowChopstick(struct Asian *asian)
 	
 	return;
 }
+/*
+Name: spawnChopstick
+Purpose: Puts the chopstick to start where the asian is currently and then count it as being thrown
+*/
 
 void spawnChopstick(struct Chopstick *chopstick,struct Asian *asian)
 {
@@ -107,7 +115,11 @@ void spawnChopstick(struct Chopstick *chopstick,struct Asian *asian)
 	
 	return;
 }
-
+/*
+Name: chopstickMove
+Purpose: Actually move the coordinates of the chopsticks
+Assumptions: Assuming the direction of the chopsticks are correct and correspond to the asian shooting them.
+*/
 void chopstickMove(struct Chopstick *chopstick)
 {
 	chopstick->x += chopstick->direction;
