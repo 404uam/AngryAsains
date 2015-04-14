@@ -1,5 +1,4 @@
 #include "model.h"
 
-
-
-void updateModelSync(struct Model *model);
+void keyPress(struct Model *model,bool *stop);
+void clock_tick(struct Model *model);
