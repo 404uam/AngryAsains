@@ -7,6 +7,8 @@
 #define false -1
 #define MIDDLEOFSCREEN 300
 
+extern int time;
+
 struct Chopstick{
 	UINT16 x,y;
 	int direction;

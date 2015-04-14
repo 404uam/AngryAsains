@@ -5,9 +5,10 @@
 
 #define RETURN	0x001C000DL
 #define LEFT 	0x001E0061L
-#define RIGHT 	0X00200064L
-#define DOWN 	0X001F0073L
-#define UP 		0X00110077L
+#define RIGHT 	0x00200064L
+#define DOWN 	0x001F0073L
+#define UP 		0x00110077L
+#define SPACE 	0x00390020L
 
 
 void keyPress(struct Model *model,bool *stop)
@@ -24,23 +25,23 @@ void keyPress(struct Model *model,bool *stop)
 		switch(input)
 		{
 			case UP:
-					asianMoveUp(model->asian1);
+					asianMoveUp(&model->asian1);
 					fflush(stdout);
 					break;
 			case DOWN: 
-					asianMoveDown(model->asian1);
+					asianMoveDown(&model->asian1);
 					fflush(stdout);
 					break;
 			case LEFT:
-					asianMoveLeft(model->asian1);
+					asianMoveLeft(&model->asian1);
 					fflush(stdout);
 					break;
 			case RIGHT:
-					asianMoveRight(model->asian1);
+					asianMoveRight(&model->asian1);
 					fflush(stdout);
 					break;
 			case SPACE:
-					asianThrowChopstick(model->asian1.chopticks)
+					time = 1;
 					fflush(stdout);
 					break;
 			case RETURN:
@@ -58,7 +59,7 @@ void keyPress(struct Model *model,bool *stop)
 
 void clock_tick(struct Model *model)
 {
-	asianMoveModel(model->asian1.chopsticks);
+	asianMoveModel(&model->asian1);
 	
 	time = 0;
 }
