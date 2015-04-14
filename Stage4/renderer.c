@@ -5,6 +5,12 @@ void render(const struct Model *model, UINT8 *base) {
     
 }
 
+void render_frame(UINT8 *base) {
+	
+	
+	
+}
+
 void render_asian_facing_right(const struct Asian *asian, UINT32 *base) {
 	plot_bitmap_32(base, asian->x, asian->y, asian_facing_left_bitmap, ASIAN_FACING_RIGHT);
 }
