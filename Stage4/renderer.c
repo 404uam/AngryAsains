@@ -2,17 +2,28 @@
 #include <stdio.h>
 
 void render(const struct Model *model, UINT8 *base) {
+
+
     
 }
 
 void render_frame(UINT8 *base) {
 	
+	clrScrn((UINT32*)base);
+	paintRgn((UINT32*)base,0,320,20,80);
+	plot_ver_line(base,320,0,640);
 	
+	plot_bitmap_32(base, 96, 32, trashcan_bitmap, TRASHCAN);
+	plot_bitmap_32(base, 192, 130, trashcan_bitmap, TRASHCAN);
+	plot_bitmap_32(base, 96, 224, trashcan_bitmap, TRASHCAN);
+	plot_bitmap_32(base, 512, 32, trashcan_bitmap, TRASHCAN);
+	plot_bitmap_32(base, 416, 130, trashcan_bitmap, TRASHCAN);
+	plot_bitmap_32(base, 512, 224, trashcan_bitmap, TRASHCAN);
 	
 }
 
 void render_asian_facing_right(const struct Asian *asian, UINT32 *base) {
-	plot_bitmap_32(base, asian->x, asian->y, asian_facing_left_bitmap, ASIAN_FACING_RIGHT);
+	plot_bitmap_32(base, asian->x, asian->y, asian_facing_right_bitmap, ASIAN_FACING_RIGHT);
 }
 
 void render_asian_facing_left(const struct Asian *asian, UINT32 *base) {
