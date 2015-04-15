@@ -19,10 +19,10 @@ void plot_bitmap_16(UINT16 *base, int x, int y, const UINT16 *bitmap, unsigned i
 
 	if(x >= 0 && (x + 1) < SCREEN_WIDTH && y >= 0 && (y + height) < SCREEN_HEIGHT) {
 		for(i = 0;i < height;i++) {
-			*(base + (i * 40)) ^= bitmap[i] >> offset;
+			*(base + (i * 40)) |= bitmap[i] >> offset;
 			if(offset > 0) {
 				base++;
-				*(base + (i * 40)) ^= bitmap[i] << (15 - offset);
+				*(base + (i * 40)) |= bitmap[i] << (15 - offset);
 				base--;
 			}
 		}
