@@ -10,9 +10,12 @@ int main()
 					   {{40,40},{40,60},{40,80}},											  /*Obstruction 1 */
 					   {{340,40},{340,60},{340,80}},										  /*Obstruction 2 */
 					   {0,368}};
-					   
-					   
+	const struct Asian *asian1 = model->asian1;
+				
 	render_frame(base);
+	render_asian_facing_right(&asian1,base);
+
+	
 
 
 
