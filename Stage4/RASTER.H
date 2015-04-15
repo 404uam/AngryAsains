@@ -14,5 +14,6 @@ void plot_bitmap_32(UINT32 *base, int x, int y, const UINT32 *bitmap, unsigned i
 void clrScrn(UINT32 *base);
 void plot_ver_line(UINT8 *base,int x, int y, int length);
 void paintRgn(UINT32 *base,int originX, int originY, int width, int height);
+void clrBitmap32(UINT32 *base,int x, int y);
 
 #endif

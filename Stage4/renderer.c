@@ -21,12 +21,12 @@ void render_frame(UINT8 *base) {
 	
 }
 
-void render_asian_facing_right(const struct Asian *asian, UINT32 *base) {
-	plot_bitmap_32(base, asian->x, asian->y, asian_facing_right_bitmap, ASIAN_FACING_RIGHT);
+void render_asian_facing_right(const struct Model *model, UINT32 *base) {
+	plot_bitmap_32(base, model->asian1.x, model->asian1.y, asian_facing_right_bitmap, ASIAN_FACING_RIGHT);
 }
 
-void render_asian_facing_left(const struct Asian *asian, UINT32 *base) {
-    plot_bitmap_32(base, asian->x, asian->y, asian_facing_left_bitmap, ASIAN_FACING_RIGHT);
+void render_asian_facing_left(const struct Model *model, UINT32 *base) {
+    plot_bitmap_32(base, model->asian2.x, model->asian2.y, asian_facing_left_bitmap, ASIAN_FACING_RIGHT);
 }
 
 void render_chopsticks_facing_right(const struct Chopstick *chopsticks, UINT16 *base) {
@@ -40,3 +40,8 @@ void render_chopsticks_facing_left(const struct Chopstick *chopsticks, UINT16 *b
 /*void render_obstuction(const struct Model *model, UINT8 *base) {
     plot_bitmap_32(base, obstruction->x, obstruction->y, trashcan_bitmap, TRASHCAN);
 }*/
+
+void clrBitmap32(UINT32 *base,int x, int y)
+{
+	clrRgn(base,x,y,1,32);
+}
