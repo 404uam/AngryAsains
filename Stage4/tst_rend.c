@@ -13,7 +13,7 @@ int main()
 					   {{340,40},{340,60},{340,80}},										  /*Obstruction 2 */
 					   {0,368}};
 				
-	render_frame(base);
+	render_static_frame(base);
 	render_asian_facing_right(&model,base);
 	render_asian_facing_left(&model,base);
 
