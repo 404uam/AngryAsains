@@ -16,8 +16,6 @@ void keyPress(struct Model *model, bool *stop)
 {
 	long input;
 	
-	printf("\033E\033Y*H");
-	
 	fflush (stdout);
 	
 	if(Cconis())
@@ -28,20 +26,15 @@ void keyPress(struct Model *model, bool *stop)
 		{
 			case UP:
 					asianMoveUp(&model->asian1);			
-					fflush(stdout);
 					break;
 			case DOWN: 
 					asianMoveDown(&model->asian1);
-					fflush(stdout);
 					break;
 			case LEFT:
 					asianMoveLeft(&model->asian1);
-					fflush(stdout);
 					break;
 			case RIGHT:
 					asianMoveRight(&model->asian1);
-
-					fflush(stdout);
 					break;
 			case SPACE:
 					time = 1;
@@ -56,7 +49,6 @@ void keyPress(struct Model *model, bool *stop)
 		}
 		
 	}
-	
 	return;
 }
 

@@ -77,7 +77,7 @@ void asianMoveModel(struct Asian *asian)
 	asian->x += asian->hor_delta;
 	asian->y += asian->ver_delta;
 	
-	printf("The position of asian is ()");
+	printf("The position of asian is (%d,%d)",asian->x,asian->y);
 	
 	resetAsianDeltas(asian);
 
