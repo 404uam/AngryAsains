@@ -4,6 +4,12 @@
 int main()
 {
 	void *base = Physbase();
+	long *timer = (long *)0x462; /* address of longword auto-inc’ed 70 x per s */
+	long timeNow;
+
+	timeNow = *timer;
+
+	
 
 	struct Chopstick chopsticks;
 	
@@ -30,21 +36,60 @@ int main()
 
 
 	while(quit) {
-
-	}
-
-
-	while(stop == false)
-	{
-		keyPress(&model, &stop);
-
-		if(time)
-		{
-			clock_tick(&model);
-		}	
+		long timeThen, timeNow, timeElapsed;
 	
+		timeNow = get_time();
+		timeElapsed = timeNow – timeThen;
+
+		long input;
+	
+		fflush (stdout);
+	
+		if(Cconis())
+		{
+			input = Cnecin();
+		
+			switch(input)
+			{
+				case UP:
+						asianMoveUp(&model->asian1);			
+						break;
+				case DOWN: 
+						asianMoveDown(&model->asian1);
+						break;
+				case LEFT:
+						asianMoveLeft(&model->asian1);
+						break;
+				case RIGHT:
+						asianMoveRight(&model->asian1);
+						break;
+				case SPACE:
+						time = 1;
+						break;
+				case RETURN:
+						printf("OUT");
+						quit = true;
+						break;
+				default:
+						break;
+			
+			}
+		}
+
+		if (timeElapsed > 0)
+		{
+			timeThen = timeNow;
+		}
 	}
 
+	return 0;
+}
 
-return 0;
+long getTime() {
+	long old_ssp;
+	old_ssp = Super(0); /* enter privileged mode */
+	timeNow = *timer;
+	Super(old_ssp); /* exit privileged mode as soon as possible */
+
+	return timeNow;
 }
