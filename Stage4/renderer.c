@@ -43,5 +43,10 @@ void render_chopsticks_facing_left(const struct Chopstick *chopsticks, UINT16 *b
 
 void clrBitmap32(UINT32 *base,int x, int y)
 {
-	clrRgn(base,x,y,1,32);
+	clrRgn32(base,x,y,1,32);
+}
+
+void clrBitmap16(UINT16 *base, int x, int y)
+{
+	clrRgn16(base,x,y,1,16);
 }
