@@ -4,7 +4,6 @@
 
 int main()
 {
-	int time = 0;
 	bool stop = false;
 	
 	modelType model = {{0,0,5,1,true,1,-1,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, /*Asian 1*/
@@ -13,20 +12,16 @@ int main()
 					   {{340,40},{340,60},{340,80}},										  /*Obstruction 2 */
 					   {0,368}};															  /*PlayerInfo Box*/
 	printf("\033E\033Y*H");
-	fflush (stdout);
 	while(stop == false)
 	{
 		keyPress(&model, &stop);
 
 		if(time)
 		{
-			stop = true;
-			printf("Waiting? in time");
 			clock_tick(&model);
-		}
-		
+		}	
+	
 	}
-	printf("WE ARE OUT");
 	Cconin();
 	
 	/*resetAsianDeltas(&asian1);*/

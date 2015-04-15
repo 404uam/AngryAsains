@@ -3,6 +3,7 @@
 #include <vt52.h>
 #include "events.h"
 
+
 #define RETURN	0x001C000DL
 #define LEFT 	0x001E0061L
 #define RIGHT 	0x00200064L
@@ -11,11 +12,12 @@
 #define SPACE 	0x00390020L
 
 
-void keyPress(struct Model *model,bool *stop)
+void keyPress(struct Model *model, bool *stop)
 {
 	long input;
 	
 	printf("\033E\033Y*H");
+	
 	fflush (stdout);
 	
 	if(Cconis())
@@ -47,11 +49,10 @@ void keyPress(struct Model *model,bool *stop)
 			case SPACE:
 					time = 1;
 					printf("Time step");
-					fflush(stdout);
 					break;
 			case RETURN:
 					printf("OUT");
-					stop = true;
+					*stop = true;
 					break;
 			default:
 					break;
@@ -67,5 +68,5 @@ void clock_tick(struct Model *model)
 {
 	asianMoveModel(&model->asian1);
 	
-	time = 0;
+	time = false;
 }
