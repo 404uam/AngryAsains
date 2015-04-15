@@ -4,7 +4,7 @@
 
 int main()
 {
-	time = 0;
+	/*time = 0;*/
 	bool stop = false;
 	
 	modelType model = {{0,0,5,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, /*Asian 1*/
@@ -12,6 +12,7 @@ int main()
 					   {{40,40},{40,60},{40,80}},											  /*Obstruction 1 */
 					   {{340,40},{340,60},{340,80}},										  /*Obstruction 2 */
 					   {0,368}};															  /*PlayerInfo Box*/
+	
 	while(stop == false)
 	{
 		keyPress(&model, &stop);
