@@ -22,7 +22,6 @@ int main()
 		}	
 	
 	}
-	Cconin();
 	
 	/*resetAsianDeltas(&asian1);*/
 	/*printf("%i,\n",asian2.hor_delta);*/

@@ -27,28 +27,24 @@ void keyPress(struct Model *model, bool *stop)
 		switch(input)
 		{
 			case UP:
-					asianMoveUp(&model->asian1);
-					printf("Moved up");
+					asianMoveUp(&model->asian1);			
 					fflush(stdout);
 					break;
 			case DOWN: 
 					asianMoveDown(&model->asian1);
-					printf("Moved Down");
 					fflush(stdout);
 					break;
 			case LEFT:
 					asianMoveLeft(&model->asian1);
-					printf("Moved Left");
 					fflush(stdout);
 					break;
 			case RIGHT:
 					asianMoveRight(&model->asian1);
-					printf("Moved Right");
+
 					fflush(stdout);
 					break;
 			case SPACE:
 					time = 1;
-					printf("Time step");
 					break;
 			case RETURN:
 					printf("OUT");
@@ -68,5 +64,5 @@ void clock_tick(struct Model *model)
 {
 	asianMoveModel(&model->asian1);
 	
-	time = false;
+	time = 0;
 }

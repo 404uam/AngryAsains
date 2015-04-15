@@ -27,7 +27,7 @@ Purpose: changes the delta for the asian to move right ->
 void asianMoveRight(struct Asian *asian)
 {
 	asian->hor_delta = 1;
-	
+	printf("Moved Right");
 	return;
 }
 /*
@@ -37,6 +37,7 @@ Purpose: changes the delta for the asian to move left <-
 void asianMoveLeft(struct Asian *asian)
 {
 	asian->hor_delta = -1;
+	printf("Moved Left");
 	
 	return;
 }
@@ -47,6 +48,7 @@ Purpose: change the delta for the asian to move up ^
 void asianMoveUp(struct Asian *asian)
 {
 	asian->ver_delta = 1;
+	printf("Moved up");
 	
 	return;
 }
@@ -57,6 +59,7 @@ Purpose: change the delta for the asian to move down v
 void asianMoveDown(struct Asian *asian)
 {
 	asian->ver_delta = -1;
+	printf("Moved Down");
 	
 	return;
 }
@@ -73,6 +76,8 @@ void asianMoveModel(struct Asian *asian)
 	}
 	asian->x += asian->hor_delta;
 	asian->y += asian->ver_delta;
+	
+	printf("The position of asian is ()");
 	
 	resetAsianDeltas(asian);
 
