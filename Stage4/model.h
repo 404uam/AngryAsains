@@ -5,7 +5,7 @@
 #define bool int
 #define true 1
 #define false -1
-#define MIDDLEOFSCREEN 300
+#define MIDDLEOFSCREEN 320
 
 extern int time;
 
