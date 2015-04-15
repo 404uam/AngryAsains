@@ -1,25 +1,33 @@
-#include "model.h"
+#include "events.h"
 #include <stdio.h>
 #include <osbind.h>
 
 int main()
 {
-	/*struct Asian asian2 = {639,399,5,1,true,1,-1};*/
-	/*struct Chopstick chopsticks[3] = {{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}};*/
-	/*struct Asian asian1 = {0,0,5,1,true,1,-1,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}};*/
-	/*struct Obstruction obs1[3] = {{40,40},{40,60},{40,80}};*/
-	/*struct Obstruction obs2[3] = {{340,40},{340,60},{340,80}};*/
-	/*struct PlayerInfo pi = {0,368};*/
+	int time = 0;
+	bool stop = false;
 	
 	modelType model = {{0,0,5,1,true,1,-1,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, /*Asian 1*/
 					   {608,0,5,1,true,1,-1,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, /*Asian 2*/
 					   {{40,40},{40,60},{40,80}},											  /*Obstruction 1 */
 					   {{340,40},{340,60},{340,80}},										  /*Obstruction 2 */
 					   {0,368}};															  /*PlayerInfo Box*/
-	
-	printf("%i,\n",model.asian1.hor_delta);
-	printf("%i,\n",model.asian1.ver_delta);
+	printf("\033E\033Y*H");
+	fflush (stdout);
+	while(stop == false)
+	{
+		keyPress(&model, &stop);
 
+		if(time)
+		{
+			stop = true;
+			printf("Waiting? in time");
+			clock_tick(&model);
+		}
+		
+	}
+	printf("WE ARE OUT");
+	Cconin();
 	
 	/*resetAsianDeltas(&asian1);*/
 	/*printf("%i,\n",asian2.hor_delta);*/

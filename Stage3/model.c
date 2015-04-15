@@ -75,7 +75,6 @@ void asianMoveModel(struct Asian *asian)
 	asian->y += asian->ver_delta;
 	
 	resetAsianDeltas(asian);
-	
 
 	return;
 }
