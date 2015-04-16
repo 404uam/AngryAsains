@@ -1,10 +1,10 @@
 all: clean tst_render
 
-tst_render: tst_rend.o model.o events.o bitmaps.o raster.o renderer.o 
-	cc68x -g tst_rend.o model.o events.o bitmaps.o raster.o renderer.o -o tst_rend
+tst_render: angry.o model.o events.o bitmaps.o raster.o renderer.o 
+	cc68x -g angry.o model.o events.o bitmaps.o raster.o renderer.o -o angry
 
-tst_rend.o: tst_rend.c renderer.h
-	cc68x -g -c tst_rend.c
+angry.o: angry.c renderer.h
+	cc68x -g -c angry.c
 
 renderer.o: renderer.c renderer.h
 	cc68x -g -c renderer.c

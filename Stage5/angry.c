@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "model.h"
 #include <osbind.h>
 #include <vt52.h>
 
