@@ -206,13 +206,13 @@ Assumptions: Assuming the direction of the chopsticks are correct and correspond
 void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 {
 	int i;
-	chopstick->x += chopstick->direction*32;
+	chopstick->x += chopstick->direction*16;
 	
 	/* Collision detection todo*/
 	/*Peusdo code*/
 	/* if collide with anything ...*/
 	/* set isThrown to false so you can use it again */
-	if(chopstick->x + chopstick->direction*32 > SCREEN_WIDTH)
+	if(chopstick->x + chopstick->direction*16 > SCREEN_WIDTH)
 	{
 		chopstick->isThrown = false;
 	}
@@ -220,13 +220,13 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 	{
 		for(i = 0; i< 3; i++)
 		{
-			if(chopstick->x + chopstick->direction*32 == model->obs1[i].x &&
-			   chopstick->y >= model->obs1[i].y && chopstick->y <= model->obs1[i].y+32)
+			if(chopstick->x + chopstick->direction*16 == model->obs1[i].x &&
+			   chopstick->y >= model->obs1[i].y && chopstick->y <= model->obs1[i].y+16)
 			{
 				chopstick->isThrown = false;
 			}
-			if(chopstick->x + chopstick->direction*32 == model->obs2[i].x &&
-			   chopstick->y >= model->obs2[i].y && chopstick->y <= model->obs2[i].y+32)
+			if(chopstick->x + chopstick->direction*16 == model->obs2[i].x &&
+			   chopstick->y >= model->obs2[i].y && chopstick->y <= model->obs2[i].y+16)
 			{
 				chopstick->isThrown = false;
 			}
@@ -264,10 +264,10 @@ void ai(struct Model *model)
 		asianMoveUp(&model->asian2);
 	} else if(model->asian1.y > model->asian2.y) {
 		asianMoveDown(&model->asian2);
-	} else {
-		asianThrowChopstick(&model->asian2);
 	}
 
+	if(model->asian1.y+32 == model->asian2.y || model->asian1.y-32 == model->asian2.y)
+		asianThrowChopstick(&model->asian2);
 	/*
 	if(model->asian2.x - model->asian1.x > 200) {
 		asianMoveLeft(&model->asian2);
