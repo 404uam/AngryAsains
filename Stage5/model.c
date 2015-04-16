@@ -69,28 +69,42 @@ void asianMoveModel(struct Asian *asian,const struct Model *model)
 {
 	int i;
 	/* TODO COLLISION DETECTION */
+	/*Checks middle line of screen */
 	if(asian->x + asian->hor_delta > (MIDDLEOFSCREEN-32))
 	{
 		resetAsianDeltas(asian);
 	}
-	else if(asian->y + asian->ver_delta > (320-32)) {
+	/*Checks playerinfo area*/
+	else if(asian->y + asian->ver_delta > (model->pi.y - 32)) 
+	{
 		resetAsianDeltas(asian);
 	}
 	else{
-		for(i = 0; i <= 3; i++)
+		for(i = 0; i < 3; i++)		/* Checks through all the obstacles on the side*/
 			{
-				if((model->obs1[i].x-32 == (asian->x + asian->hor_delta) &&
-				   model->obs1[i].y == (asian->y + asian->ver_delta))||
-				   (model->obs1[i].x+32 == (asian->x + asian->hor_delta) &&
-				   model->obs1[i].y == (asian->y + asian->ver_delta))||
-				   (model->obs1[i].x == (asian->x + asian->hor_delta) &&
-				   model->obs1[i].y-32 == (asian->y + asian->ver_delta))||
-				   (model->obs1[i].x == (asian->x + asian->hor_delta) &&
-				   model->obs1[i].y+32 == (asian->y + asian->ver_delta)))
-				   {
-						printf("Got here!\n");
+				if( model->obs1[i].y == (asian->y + asian->ver_delta) &&
+					asian->x + asian->hor_delta > model->obs1[i].x-32)
+					{
 						resetAsianDeltas(asian);
-				   }
+					}
+				if(	model->obs1[i].y == (asian->y + asian->ver_delta) &&
+					asian->x + asian->hor_delta > model->obs1[i].x+32)
+					{
+						resetAsianDeltas(asian);
+					}
+				/*Are you trying to move DOWN into the trash?*/
+				if(	model->obs1[i].x == (asian->x + asian->hor_delta) &&
+					asian->y + asian->ver_delta > model->obs1[i].y-32)
+					{
+						resetAsianDeltas(asian);
+					}
+				/*Are you trying to move UP in to the trashcan??*/
+				if(	model->obs1[i].x == (asian->x + asian->hor_delta) &&
+					asian->y + asian->ver_delta < model->obs1[i].y+32)
+					{
+						resetAsianDeltas(asian);
+					}
+					
 			}
 		}
 	
