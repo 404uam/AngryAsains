@@ -50,7 +50,7 @@ void asianMoveRight(struct Asian *asian);
 void asianMoveLeft(struct Asian *asian);
 void asianMoveUp(struct Asian *asian);
 void asianMoveDown(struct Asian *asian);
-void asianMoveModel(struct Asian *asian,const struct Model *model);
+void asianMoveModel(struct Asian *asian,const struct Model *model, int type);
 void asianThrowChopstick(struct Asian *asian);
 
 void spawnChopstick(struct Chopstick *chopstick, struct Asian *asian);
@@ -59,6 +59,7 @@ void moveAliveChopsticks(struct Asian *asian,struct Model *model);
 
 
 void updateModel(struct Model *model);
+void ai(struct Model *model);
 
 
 #endif

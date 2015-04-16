@@ -65,50 +65,93 @@ void asianMoveDown(struct Asian *asian)
 Name: asianMoveModel
 Purpose: actually update the model by adding the deltas
 */
-void asianMoveModel(struct Asian *asian,const struct Model *model)
+void asianMoveModel(struct Asian *asian,const struct Model *model,int type)
 {
 	int i;
 	/* TODO COLLISION DETECTION */
 	/*Checks middle line of screen */
-	if(asian->x + asian->hor_delta > (MIDDLEOFSCREEN-32))
+	if(type == 1) 
 	{
-		resetAsianDeltas(asian);
-	}
-	/*Checks playerinfo area*/
-	else if(asian->y + asian->ver_delta > (model->pi.y - 32)) 
-	{
-		resetAsianDeltas(asian);
-	}
-	else{
-		for(i = 0; i < 3; i++)		/* Checks through all the obstacles on the side*/
-			{
-				/*Are you trying to move RIGHT in to the trash*/
-				if( model->obs1[i].y == (asian->y+ asian->ver_delta)  && model->obs1[i].x-32 == asian->x &&
-					asian->x + asian->hor_delta > model->obs1[i].x-32)
-					{
-						resetAsianDeltas(asian);
-					}
-				/*Are you trying to move LEFT into the trash?*/	
-				if(	model->obs1[i].y == (asian->y + asian->ver_delta)  && model->obs1[i].x+32 == asian->x &&
-					asian->x + asian->hor_delta < model->obs1[i].x+32)
-					{
-						resetAsianDeltas(asian);
-					}
-				/*Are you trying to move DOWN into the trash?*/
-				if(	model->obs1[i].x == (asian->x + asian->hor_delta) && model->obs1[i].y-32 == asian->y &&
-					asian->y + asian->ver_delta > model->obs1[i].y-32)
-					{
-						resetAsianDeltas(asian);
-					}
-				/*Are you trying to move UP in to the trashcan??*/
-				if(	model->obs1[i].x == (asian->x + asian->hor_delta) && model->obs1[i].y+32 == asian->y &&
-					asian->y + asian->ver_delta < model->obs1[i].y+32)
-					{
-						resetAsianDeltas(asian);
-					}
-					
-			}
+		if(asian->x + asian->hor_delta > (MIDDLEOFSCREEN-32))
+		{
+			resetAsianDeltas(asian);
 		}
+		/*Checks playerinfo area*/
+		else if(asian->y + asian->ver_delta > (model->pi.y - 32)) 
+		{
+			resetAsianDeltas(asian);
+		}
+		else{
+			for(i = 0; i < 3; i++)		/* Checks through all the obstacles on the side*/
+				{
+					/*Are you trying to move RIGHT in to the trash*/
+					if( model->obs1[i].y == (asian->y+ asian->ver_delta)  && model->obs1[i].x-32 == asian->x &&
+						asian->x + asian->hor_delta > model->obs1[i].x-32)
+						{
+							resetAsianDeltas(asian);
+						}
+					/*Are you trying to move LEFT into the trash?*/	
+					if(	model->obs1[i].y == (asian->y + asian->ver_delta)  && model->obs1[i].x+32 == asian->x &&
+						asian->x + asian->hor_delta < model->obs1[i].x+32)
+						{
+							resetAsianDeltas(asian);
+						}
+					/*Are you trying to move DOWN into the trash?*/
+					if(	model->obs1[i].x == (asian->x + asian->hor_delta) && model->obs1[i].y-32 == asian->y &&
+						asian->y + asian->ver_delta > model->obs1[i].y-32)
+						{
+							resetAsianDeltas(asian);
+						}
+					/*Are you trying to move UP in to the trashcan??*/
+					if(	model->obs1[i].x == (asian->x + asian->hor_delta) && model->obs1[i].y+32 == asian->y &&
+						asian->y + asian->ver_delta < model->obs1[i].y+32)
+						{
+							resetAsianDeltas(asian);
+						}
+						
+				}
+			}
+	} else {
+		if(asian->x + asian->hor_delta < (MIDDLEOFSCREEN+32))
+		{
+			resetAsianDeltas(asian);
+		}
+		/*Checks playerinfo area*/
+		else if(asian->y + asian->ver_delta > (model->pi.y - 32)) 
+		{
+			resetAsianDeltas(asian);
+		}
+		else{
+			for(i = 0; i < 3; i++)		/* Checks through all the obstacles on the side*/
+				{
+					/*Are you trying to move RIGHT in to the trash*/
+					if( model->obs2[i].y == (asian->y+ asian->ver_delta)  && model->obs2[i].x-32 == asian->x &&
+						asian->x + asian->hor_delta > model->obs2[i].x-32)
+						{
+							resetAsianDeltas(asian);
+						}
+					/*Are you trying to move LEFT into the trash?*/	
+					if(	model->obs2[i].y == (asian->y + asian->ver_delta)  && model->obs2[i].x+32 == asian->x &&
+						asian->x + asian->hor_delta < model->obs2[i].x+32)
+						{
+							resetAsianDeltas(asian);
+						}
+					/*Are you trying to move DOWN into the trash?*/
+					if(	model->obs2[i].x == (asian->x + asian->hor_delta) && model->obs2[i].y-32 == asian->y &&
+						asian->y + asian->ver_delta > model->obs2[i].y-32)
+						{
+							resetAsianDeltas(asian);
+						}
+					/*Are you trying to move UP in to the trashcan??*/
+					if(	model->obs2[i].x == (asian->x + asian->hor_delta) && model->obs2[i].y+32 == asian->y &&
+						asian->y + asian->ver_delta < model->obs2[i].y+32)
+						{
+							resetAsianDeltas(asian);
+						}
+						
+				}
+			}
+	}
 	
 	asian->x += asian->hor_delta*32;
 	asian->y += asian->ver_delta*32;
@@ -209,6 +252,17 @@ void moveAliveChopsticks(struct Asian *asian,struct Model *model)
 
 void updateModel(struct Model *model)
 {
-	asianMoveModel(&model->asian1,model);
+	asianMoveModel(&model->asian1,model,1);
+	asianMoveModel(&model->asian2,model,2);
 	moveAliveChopsticks(&model->asian1,model);
+}
+
+void ai(struct Model *model)
+{
+	asianMoveUp(&model->asian2);
+	/*if(model->asian1.y < model->asian2.y) {
+		asianMoveUp(&model->asian2);
+	} else if(model->asian1.y > model->asian2.y) {
+		asianMoveDown(&model->asian2);
+	}*/
 }

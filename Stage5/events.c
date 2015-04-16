@@ -54,7 +54,7 @@ void keyPress(struct Model *model, bool *stop)
 
 void clock_tick(struct Model *model)
 {
-	asianMoveModel(&model->asian1,model);
+	/*asianMoveModel(&model->asian1,model);*/
 	
 	time = 0;
 }
