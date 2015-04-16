@@ -7,6 +7,7 @@ Purpose: Function declaration for the model. Functions for the Asians and chopst
 		Chopsticks moving and collision detecting
 */
 #include "model.h"
+#include <osbind.h>
 #include <stdio.h>
 
 /*
@@ -27,7 +28,7 @@ Purpose: changes the delta for the asian to move right ->
 void asianMoveRight(struct Asian *asian)
 {
 	asian->hor_delta = 1;
-	printf("Moved Right");
+
 	return;
 }
 /*
@@ -37,7 +38,6 @@ Purpose: changes the delta for the asian to move left <-
 void asianMoveLeft(struct Asian *asian)
 {
 	asian->hor_delta = -1;
-	printf("Moved Left");
 	
 	return;
 }
@@ -48,7 +48,6 @@ Purpose: change the delta for the asian to move up ^
 void asianMoveUp(struct Asian *asian)
 {
 	asian->ver_delta = -1;
-	printf("Moved up");
 	
 	return;
 }
@@ -59,7 +58,6 @@ Purpose: change the delta for the asian to move down v
 void asianMoveDown(struct Asian *asian)
 {
 	asian->ver_delta = 1;
-	printf("Moved Down");
 	
 	return;
 }
@@ -67,18 +65,32 @@ void asianMoveDown(struct Asian *asian)
 Name: asianMoveModel
 Purpose: actually update the model by adding the deltas
 */
-void asianMoveModel(struct Asian *asian)
+void asianMoveModel(struct Asian *asian,const struct Model *model)
 {
+	int i;
 	/* TODO COLLISION DETECTION */
 	if(asian->x + asian->hor_delta > (MIDDLEOFSCREEN-32))
 	{
 		resetAsianDeltas(asian);
 	}
-	asian->x += asian->hor_delta;
-	asian->y += asian->ver_delta;
+	else if(asian->y + asian->hor_delta > (368)) {
+		resetAsianDeltas(asian);
+	}
+	else{
+		for(i = 0; i < 3; i++)
+			{
+				if(model->obs1[i].x == (asian->x + asian->hor_delta) ||
+				   model->obs1[i].y == (asian->y + asian->ver_delta)){
+						printf("Got here");
+						resetAsianDeltas(asian);
+				   }
+			}
+		}
 	
-	printf("\nThe position of asian is (%d,%d)\n",asian->x,asian->y);
+	asian->x += asian->hor_delta*32;
+	asian->y += asian->ver_delta*32;
 	
+	printf("The asian position is (%d,%d)",asian->x,asian->y);
 	resetAsianDeltas(asian);
 
 	return;

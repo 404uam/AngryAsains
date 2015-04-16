@@ -84,7 +84,7 @@ void paintRgn(UINT32 *base,int x, int y, int width, int height)
 	}
 }
 
-void clrRgn(UINT32 *base,int x, int y, int width, int height)
+void clrRgn32(UINT32 *base,int x, int y, int width, int height)
 {
 	int i;
 	int j;
@@ -100,7 +100,22 @@ void clrRgn(UINT32 *base,int x, int y, int width, int height)
 			}
 		}
 	}
+}
 
-
-
+void clrRgn16(UINT16 *base,int x, int y, int width, int height)
+{
+	int i;
+	int j;
+	
+		if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT){
+			base +=  y * 40 + (x >> 4);
+	
+		for(i = 0; i < height; i++)
+		{
+			for(j = 0; j < width; j++)
+			{
+				*(base + i*40 + j) &= 0x00000000;
+			}
+		}
+	}
 }

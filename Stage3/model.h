@@ -48,7 +48,7 @@ void asianMoveRight(struct Asian *asian);
 void asianMoveLeft(struct Asian *asian);
 void asianMoveUp(struct Asian *asian);
 void asianMoveDown(struct Asian *asian);
-void asianMoveModel(struct Asian *asian);
+void asianMoveModel(struct Asian *asian,const struct Model *model);
 void asianThrowChopstick(struct Asian *asian);
 
 void spawnChopstick(struct Chopstick *chopstick, struct Asian *asian);

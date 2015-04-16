@@ -5,7 +5,7 @@
 #define bool int
 #define true 1
 #define false -1
-#define MIDDLEOFSCREEN 300
+#define MIDDLEOFSCREEN 320
 
 extern int time;
 
@@ -48,7 +48,7 @@ void asianMoveRight(struct Asian *asian);
 void asianMoveLeft(struct Asian *asian);
 void asianMoveUp(struct Asian *asian);
 void asianMoveDown(struct Asian *asian);
-void asianMoveModel(struct Asian *asian);
+void asianMoveModel(struct Asian *asian,const struct Model *model);
 void asianThrowChopstick(struct Asian *asian);
 
 void spawnChopstick(struct Chopstick *chopstick, struct Asian *asian);

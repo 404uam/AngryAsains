@@ -1,7 +1,7 @@
-#include "renderer.h"
-#include "model.h"
+#include "angry.h"
 #include <osbind.h>
 #include <vt52.h>
+#include "TYPES.H"
 
 #define RETURN	0x001C000DL
 #define LEFT 	0x001E0061L
@@ -16,26 +16,26 @@ int main()
 {
 	void *base = Physbase();
 	UINT32 timeThen, timeNow, timeElapsed;
+	bool quit = false;
+	long input;
+	
 
 	modelType model = {{0,0,5,1,true,0,0,{{310,50,1,1,false},{50,50,1,1,false},{0,0,1,1,false}}}, 
 					   {608,288,5,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
-					   {{40,40},{40,60},{40,80}},											
-					   {{340,40},{340,60},{340,80}},										
+					   {{96,32},{192,130},{96,224}},											
+					   {{512,32},{416,130},{512,224}},										
 					   {0,368}};
 
 	render_static_frame(base);
 	render_asian_facing_right(&model,base);
 	render_asian_facing_left(&model,base);
 
-	bool quit = false;
 	timeThen = getTime();
-
-	while(quit == -1) 
+	
+	while(quit == false) 
 	{
 		timeNow = getTime();
 		timeElapsed = timeNow - timeThen;
-
-		long input;
 	
 		fflush (stdout);
 
@@ -46,16 +46,16 @@ int main()
 			switch(input)
 			{
 				case UP:
-						asianMoveUp(&model->asian1);			
+						asianMoveUp(&model.asian1);			
 						break;
 				case DOWN: 
-						asianMoveDown(&model->asian1);
+						asianMoveDown(&model.asian1);
 						break;
 				case LEFT:
-						asianMoveLeft(&model->asian1);
+						asianMoveLeft(&model.asian1);
 						break;
 				case RIGHT:
-						asianMoveRight(&model->asian1);
+						asianMoveRight(&model.asian1);
 						break;
 				case SPACE:
 						time = 1;
@@ -71,9 +71,10 @@ int main()
 
 		if (timeElapsed > 0)
 		{
-			asianMoveModel(&model->asian1);
+			asianMoveModel(&model.asian1,&model);
 
-			render_static_frame(base);
+			/*clrBitmap32(base,model.asian1.x,model.asian1.y);
+			clrBitmap32(base,model.asian2.x,model.asian2.y);*/
 			render_asian_facing_right(&model,base);
 			render_asian_facing_left(&model,base);
 			

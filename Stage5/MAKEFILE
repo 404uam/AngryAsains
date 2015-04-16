@@ -3,7 +3,7 @@ all: clean tst_render
 tst_render: angry.o model.o events.o bitmaps.o raster.o renderer.o 
 	cc68x -g angry.o model.o events.o bitmaps.o raster.o renderer.o -o angry
 
-angry.o: angry.c renderer.h
+angry.o: angry.c angry.h
 	cc68x -g -c angry.c
 
 renderer.o: renderer.c renderer.h
