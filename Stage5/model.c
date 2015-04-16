@@ -171,3 +171,21 @@ void chopstickMove(struct Chopstick *chopstick)
 	return;
 }
 
+void moveAliveChopsticks(struct Asian *asian)
+{
+	int i;
+
+	for(i = 0; i < 3; i++)
+	{
+		if (asian->chopsticks[i].isThrown == true)
+		{
+			chopstickMove(&asian->chopsticks[i]);
+		}
+	}
+}
+
+void updateModel(struct Model *model)
+{
+	asianMoveModel(&model->asian1,model);
+	moveAliveChopsticks(&model->asian1);
+}

@@ -18,13 +18,13 @@ int main()
 	UINT32 timeThen, timeNow, timeElapsed;
 	bool quit = false;
 	long input;
-	
 
 	modelType model = {{0,0,5,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
 					   {608,288,5,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
 					   {{96,32},{192,128},{96,224}},											
 					   {{512,32},{416,128},{512,224}},										
 					   {0,320}};
+					   
 
 	render_static_frame(base);
 	render_asian_facing_right(&model,base);
@@ -63,7 +63,6 @@ int main()
 						break;
 				case SPACE:
 						asianThrowChopstick(&model.asian1);
-						render_chopsticks_facing_right(&model.asian1.chopsticks[], UINT16 *base);
 						break;
 				case RETURN:
 						printf("OUT");
@@ -76,8 +75,10 @@ int main()
 
 		if (timeElapsed > 0)
 		{
-			asianMoveModel(&model.asian1,&model);
-
+			updateModel(&model);
+			
+		
+			render_alive_chopsticks(&model.asian1,1,base);
 			render_asian_facing_right(&model,base);
 			render_asian_facing_left(&model,base);
 			

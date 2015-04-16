@@ -53,6 +53,10 @@ void asianThrowChopstick(struct Asian *asian);
 
 void spawnChopstick(struct Chopstick *chopstick, struct Asian *asian);
 void chopstickMove(struct Chopstick *chopstick);
+void moveAliveChopsticks(struct Asian *asian);
+
+
+void updateModel(struct Model *model);
 
 
 #endif

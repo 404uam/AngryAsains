@@ -70,23 +70,18 @@ void render_chopsticks_facing_left(const struct Chopstick *chopsticks, UINT16 *b
     plot_bitmap_16(base, chopsticks->x, chopsticks->y, chopsticks_moving_left, CHOPSTICKS);
 }
 
-void render_alive_chopsticks(const struct Model *model,int asian,UINT16 *base) {
+void render_alive_chopsticks(const struct Asian *asian,int type,UINT16 *base) {
 	int i;
-	struct Chopsticks chopsticks[3];
-	
+
 	for(i = 0; i < 3; i++)
 	{
-		if (chopsticks[i]->isThrown && asian == 1)
+		if (asian->chopsticks[i].isThrown == true && type == 1)
 		{
-			asian = model->asian1;
-			chopsticks[3] = asian1->chopsticks;
-			render_chopsticks_facing_right(chopsticks[i],base);
+			render_chopsticks_facing_right(&asian->chopsticks[i],base);
 		}
 		else
 		{
-			asian = model->asian2;
-			chopsticks[3] = asian2->chopsticks;
-			render_chopsticks_facing_left(chopsticks[i],base);
+			render_chopsticks_facing_left(&asian->chopsticks[i],base);
 		}
 	}
 	
