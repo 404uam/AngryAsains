@@ -1,14 +1,13 @@
 #include <osbind.h>
 
 void stop_sound();
+void write_select();
 
 extern volatile char *PSG_reg_select = 0xFF8800;
 extern volatile char *PSG_reg_write  = 0xFF8802;
 
 int main()
 {
-	int i;
-
 	long old_ssp = Super(0);
 
 	*PSG_reg_select = 0;		/* set channel A fine tune = 248 */
@@ -19,13 +18,6 @@ int main()
 
 	*PSG_reg_select = 7;		/* enable channel A on mixer */
 	*PSG_reg_write  = 0x3E;
-
-	*PSG_reg_select = 8;		/* set channel A volume = 11 */
-	*PSG_reg_write  = 11;
-
-	for(i = 0;i < 500;i++) {
-		stop_sound();
-	}
 
 	*PSG_reg_select = 8;		/* set channel A volume = 11 */
 	*PSG_reg_write  = 11;
@@ -42,12 +34,21 @@ int main()
 
 
 void stop_sound() {
-	*PSG_reg_select = 8;
-	*PSG_reg_write  = 0;
+	write_select(8,0);
+	write_select(9,0);
+	write_select(10,0);
+}
 
-	*PSG_reg_select = 9;
-	*PSG_reg_write  = 0;
-	
-	*PSG_reg_select = 0xA;
-	*PSG_reg_write  = 0;
+void write_select(int select, int write) {
+	*PSG_reg_select = select;
+	*PSG_reg_write  = write;
+}
+
+void envelope(int shape, unsigned int sustain) {
+	UINT8 rough_sustain = sustain & 0x00FF;
+	UINT8 fine_sustain = (sustain & 0xFF00) >> 8;
+
+	write_select(11,fine_sustain);
+	write_select(12,rough_sustain);
+	write_select(13,shape);
 }
