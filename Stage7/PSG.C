@@ -7,6 +7,8 @@ extern volatile char *PSG_reg_write  = 0xFF8802;
 
 int main()
 {
+	int i;
+
 	long old_ssp = Super(0);
 
 	*PSG_reg_select = 0;		/* set channel A fine tune = 248 */
@@ -17,6 +19,13 @@ int main()
 
 	*PSG_reg_select = 7;		/* enable channel A on mixer */
 	*PSG_reg_write  = 0x3E;
+
+	*PSG_reg_select = 8;		/* set channel A volume = 11 */
+	*PSG_reg_write  = 11;
+
+	for(i = 0;i < 500;i++) {
+		stop_sound();
+	}
 
 	*PSG_reg_select = 8;		/* set channel A volume = 11 */
 	*PSG_reg_write  = 11;
@@ -33,6 +42,12 @@ int main()
 
 
 void stop_sound() {
-	*PSG_reg_select = 8;		/* set channel A volume = 0 */
+	*PSG_reg_select = 8;
+	*PSG_reg_write  = 0;
+
+	*PSG_reg_select = 9;
+	*PSG_reg_write  = 0;
+	
+	*PSG_reg_select = 0xA;
 	*PSG_reg_write  = 0;
 }

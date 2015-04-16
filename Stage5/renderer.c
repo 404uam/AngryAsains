@@ -29,7 +29,6 @@ void render_static_frame(UINT8 *base,struct Model *model) {
 	paintRgn((UINT32*)base,0,320,20,80);
 	plot_ver_line(base,320,0,640);
 	
-	render_score((UINT32*)base,model);
 	plot_bitmap_32((UINT32*)base, 96, 32, trashcan_bitmap, TRASHCAN);
 	plot_bitmap_32((UINT32*)base, 192, 130, trashcan_bitmap, TRASHCAN);
 	plot_bitmap_32((UINT32*)base, 96, 224, trashcan_bitmap, TRASHCAN);

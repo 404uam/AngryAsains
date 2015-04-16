@@ -78,10 +78,6 @@ int main()
 						asianThrowChopstick(&model.asian1);
 						break;
 				case RETURN:
-				/*
-						Setscreen(-1,base,-1);
-						Vsync();
-				*/
 						printf("OUT");
 						quit = true;
 						break;
@@ -97,10 +93,9 @@ int main()
 				unrender_alive_chopsticks(&model.asian1,back);
 				unrender_alive_chopsticks(&model.asian2,back);
 				ai(&model);
-				clrBitmap32(back,model.asian2.x,model.asian2.y);
+				clrBitmap32(back,&model.asian2.x,&model.asian2.y);
 				updateModel(&model);
-				
-
+				render_score(back,&model);
 
 				render_alive_chopsticks(&model.asian1,1,back);
 				render_alive_chopsticks(&model.asian2,2,back);
@@ -119,13 +114,15 @@ int main()
 				ai(&model);
 				clrBitmap32(base,model.asian2.x,model.asian2.y);
 				updateModel(&model);
-				
+				render_score(base,&model);
 
 				render_alive_chopsticks(&model.asian1,1,base);
 				render_alive_chopsticks(&model.asian2,2,base);
 				render_asian_facing_right(&model,base);
 				render_asian_facing_left(&model,base);
 
+				Setscreen(-1,base,-1);
+				Vsync();
 
 				memcpy(back, background, 32256);
 
@@ -135,6 +132,9 @@ int main()
 			timeThen = timeNow;
 		}
 	}
+
+	Setscreen(-1,base,-1);
+	Vsync();
 
 	return 0;
 }
