@@ -212,27 +212,7 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 	/*Peusdo code*/
 	/* if collide with anything ...*/
 	/* set isThrown to false so you can use it again */
-	if(chopstick->x + chopstick->direction*16 > SCREEN_WIDTH)
-	{
-		printf("hit border");
-		chopstick->isThrown = false;
-	}
-	else if((chopstick->x == model->asian1.x) && 
-		chopstick->y == model -> asian1.y)
-		{
-			chopstick->isThrown = false;
-			model -> asian1.lives -= 1;
-		}
-	else if ((chopstick->x == model->asian2.x) && 
-		chopstick->y == model -> asian2.y)
-		{
-			printf("hit ");
-			chopstick->isThrown = false;
-			model -> asian2.lives -= 1;
-		}
-	else
-	{
-		for(i = 0; i< 3; i++)
+	for(i = 0; i< 3; i++)
 		{
 			if(chopstick->x + chopstick->direction*16 == model->obs1[i].x &&
 			   chopstick->y >= model->obs1[i].y && chopstick->y <= model->obs1[i].y+16)
@@ -245,7 +225,25 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 				chopstick->isThrown = false;
 			}
 		}
+		
+	if(chopstick->x + chopstick->direction*16 > SCREEN_WIDTH)
+	{
+		chopstick->isThrown = false;
 	}
+	if((chopstick->x >= model->asian1.x) && (chopstick->x <= model->asian1.x+32) &&
+		chopstick->y >= model -> asian1.y && (chopstick->y <= model->asian1.y+32) && (chopstick->direction == -1))
+		{
+			printf("I'm asian1");
+			chopstick->isThrown = false;
+			model -> asian1.lives -= 1;
+		}
+	if ((chopstick->x >= model->asian2.x) && (chopstick->x <= model->asian2.x+32) && 
+		chopstick->y >= model -> asian2.y&& (chopstick->y <= model->asian2.y+32))
+		{
+			printf("I'm asian2");
+			chopstick->isThrown = false;
+			model -> asian2.lives -= 1;
+		}
 	
 	return;
 }
