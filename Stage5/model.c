@@ -90,7 +90,7 @@ void asianMoveModel(struct Asian *asian,const struct Model *model)
 					}
 				/*Are you trying to move LEFT into the trash?*/	
 				if(	model->obs1[i].y == (asian->y + asian->ver_delta)  && model->obs1[i].x+32 == asian->x &&
-					asian->x + asian->hor_delta > model->obs1[i].x+32)
+					asian->x + asian->hor_delta < model->obs1[i].x+32)
 					{
 						resetAsianDeltas(asian);
 					}
