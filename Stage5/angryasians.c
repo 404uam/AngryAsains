@@ -29,7 +29,7 @@ int main()
 	bool quit = false;
 	timeThen = getTime();
 
-	while(quit) 
+	while(quit == -1) 
 	{
 		timeNow = getTime();
 		timeElapsed = timeNow - timeThen;
