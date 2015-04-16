@@ -77,7 +77,7 @@ void asianMoveModel(struct Asian *asian,const struct Model *model)
 		resetAsianDeltas(asian);
 	}
 	else{
-		for(i = 0; i < 3; i++)
+		for(i = 0; i <= 3; i++)
 			{
 				if((model->obs1[i].x-32 == (asian->x + asian->hor_delta) &&
 				   model->obs1[i].y == (asian->y + asian->ver_delta))||
@@ -88,6 +88,7 @@ void asianMoveModel(struct Asian *asian,const struct Model *model)
 				   (model->obs1[i].x == (asian->x + asian->hor_delta) &&
 				   model->obs1[i].y+32 == (asian->y + asian->ver_delta)))
 				   {
+						printf("Got here!\n");
 						resetAsianDeltas(asian);
 				   }
 			}
