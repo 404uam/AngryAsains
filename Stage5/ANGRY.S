@@ -171,43 +171,54 @@ L7:
 	jsr	_unrender_alive_chopsticks
 	addq.l	#8,a7
 	;line	97
+	move.l	d3,-(a7)
+	pea	-94(a6)
+	jsr	_unrender_alive_chopsticks
+	addq.l	#8,a7
+	;line	98
 	move.l	d4,-(a7)
 	jsr	_ai
 	addq.l	#4,a7
-	;line	98
+	;line	99
 	move.w	-92(a6),-(a7)
 	move.w	-94(a6),-(a7)
 	move.l	d3,-(a7)
 	jsr	(a3)
 	addq.l	#8,a7
-	;line	99
+	;line	100
 	move.l	d4,-(a7)
 	jsr	_updateModel
 	addq.l	#4,a7
-	;line	103
+	;line	104
 	move.l	d3,-(a7)
 	move.w	#1,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_alive_chopsticks
 	lea	10(a7),a7
-	;line	104
+	;line	105
+	move.l	d3,-(a7)
+	move.w	#2,-(a7)
+	pea	-94(a6)
+	jsr	_render_alive_chopsticks
+	lea	10(a7),a7
+	;line	106
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_right
 	addq.l	#8,a7
-	;line	105
+	;line	107
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_left
 	addq.l	#8,a7
-	;line	113
+	;line	115
 	move.l	d5,d6
 L16:
 L5:
 	cmp.w	#-1,d7
 	beq	L4
 L6:
-	;line	117
+	;line	119
 	moveq	#0,d0
 L17:
 	movem.l	-166(a6),d3/d4/d5/d6/d7/a3/a4
@@ -215,22 +226,22 @@ L17:
 	rts
 _getTime:
 	link	a6,#-12
-	;line	124
+	;line	126
 	move.l	#1122,-4(a6)
-	;line	124
+	;line	126
 	pea	0
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
 	addq.l	#6,a7
 	move.l	d0,-12(a6)
-	;line	125
+	;line	127
 	move.l	-4(a6),a0
 	move.l	(a0),-8(a6)
-	;line	126
+	;line	128
 	move.l	-12(a6),-(a7)
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
-	;line	127
+	;line	129
 	move.l	-8(a6),d0
 L18:
 	unlk	a6

@@ -255,6 +255,7 @@ void updateModel(struct Model *model)
 	asianMoveModel(&model->asian1,model,1);
 	asianMoveModel(&model->asian2,model,2);
 	moveAliveChopsticks(&model->asian1,model);
+	moveAliveChopsticks(&model->asian2,model);
 }
 
 void ai(struct Model *model)
@@ -263,6 +264,8 @@ void ai(struct Model *model)
 		asianMoveUp(&model->asian2);
 	} else if(model->asian1.y > model->asian2.y) {
 		asianMoveDown(&model->asian2);
+	} else {
+		asianThrowChopstick(&model->asian2);
 	}
 
 	if(model->asian2.x - model->asian1.x > 200) {

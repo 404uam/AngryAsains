@@ -94,6 +94,7 @@ int main()
 		{
 			/*memcpy(base, background, 32257);*/
 			unrender_alive_chopsticks(&model.asian1,base);
+			unrender_alive_chopsticks(&model.asian2,base);
 			ai(&model);
 			clrBitmap32(base,model.asian2.x,model.asian2.y);
 			updateModel(&model);
@@ -101,6 +102,7 @@ int main()
 
 
 			render_alive_chopsticks(&model.asian1,1,base);
+			render_alive_chopsticks(&model.asian2,2,base);
 			render_asian_facing_right(&model,base);
 			render_asian_facing_left(&model,base);
 
