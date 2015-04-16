@@ -79,12 +79,31 @@ void render_alive_chopsticks(const struct Asian *asian,int type,UINT16 *base) {
 		{
 			render_chopsticks_facing_right(&asian->chopsticks[i],base);
 		}
-		else
+		else if(asian->chopsticks[i].isThrown == true)
 		{
 			render_chopsticks_facing_left(&asian->chopsticks[i],base);
 		}
 	}
 	
+}
+
+void unrender_alive_chopsticks(const struct Asian *asian,UINT16 *base)
+{
+		int i;
+
+	for(i = 0; i < 3; i++)
+	{
+		if (asian->chopsticks[i].isThrown == true)
+		{
+			clrBitmap16(base,asian->chopsticks[i].x,asian->chopsticks[i].y);
+		}
+		else if(asian->chopsticks[i].isThrown == true)
+		{
+			clrBitmap16(base,asian->chopsticks[i].x,asian->chopsticks[i].y);
+		}
+	}
+
+
 }
 
 /*

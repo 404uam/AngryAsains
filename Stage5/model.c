@@ -149,7 +149,7 @@ Purpose: Puts the chopstick to start where the asian is currently and then count
 void spawnChopstick(struct Chopstick *chopstick,struct Asian *asian)
 {
 	/* Addding 32 and 16 to shoot from the middle of the asian */
-	chopstick->x = asian->x + 32;
+	chopstick->x = asian->x;
 	chopstick->y = asian->y + 16;
 	chopstick->isThrown = true;
 	
@@ -160,18 +160,41 @@ Name: chopstickMove
 Purpose: Actually move the coordinates of the chopsticks
 Assumptions: Assuming the direction of the chopsticks are correct and correspond to the asian shooting them.
 */
-void chopstickMove(struct Chopstick *chopstick)
+void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 {
-	chopstick->x += chopstick->direction;
+	int i;
+	chopstick->x += chopstick->direction*32;
 	
 	/* Collision detection todo*/
 	/*Peusdo code*/
 	/* if collide with anything ...*/
 	/* set isThrown to false so you can use it again */
+	if(chopstick->x + chopstick->direction*32 > SCREEN_WIDTH)
+	{
+		chopstick->isThrown = false;
+	}
+	else
+	{
+		for(i = 0; i< 3; i++)
+		{
+			if(chopstick->x + chopstick->direction*32 == model->obs1[i].x &&
+			   chopstick->y >= model->obs1[i].y && chopstick->y <= model->obs1[i].y+32)
+			{
+				chopstick->isThrown = false;
+			}
+			if(chopstick->x + chopstick->direction*32 == model->obs2[i].x &&
+			   chopstick->y >= model->obs2[i].y && chopstick->y <= model->obs2[i].y+32)
+			{
+				chopstick->isThrown = false;
+			}
+		}
+	
+	}
+	
 	return;
 }
 
-void moveAliveChopsticks(struct Asian *asian)
+void moveAliveChopsticks(struct Asian *asian,struct Model *model)
 {
 	int i;
 
@@ -179,7 +202,7 @@ void moveAliveChopsticks(struct Asian *asian)
 	{
 		if (asian->chopsticks[i].isThrown == true)
 		{
-			chopstickMove(&asian->chopsticks[i]);
+			chopstickMove(&asian->chopsticks[i],model);
 		}
 	}
 }
@@ -187,5 +210,5 @@ void moveAliveChopsticks(struct Asian *asian)
 void updateModel(struct Model *model)
 {
 	asianMoveModel(&model->asian1,model);
-	moveAliveChopsticks(&model->asian1);
+	moveAliveChopsticks(&model->asian1,model);
 }

@@ -6,6 +6,8 @@
 #define true 1
 #define false -1
 #define MIDDLEOFSCREEN 320
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 400
 
 extern int time;
 
@@ -52,8 +54,8 @@ void asianMoveModel(struct Asian *asian,const struct Model *model);
 void asianThrowChopstick(struct Asian *asian);
 
 void spawnChopstick(struct Chopstick *chopstick, struct Asian *asian);
-void chopstickMove(struct Chopstick *chopstick);
-void moveAliveChopsticks(struct Asian *asian);
+void chopstickMove(struct Chopstick *chopstick,struct Model *model);
+void moveAliveChopsticks(struct Asian *asian,struct Model *model);
 
 
 void updateModel(struct Model *model);

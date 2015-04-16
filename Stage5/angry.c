@@ -75,6 +75,7 @@ int main()
 
 		if (timeElapsed > 0)
 		{
+			unrender_alive_chopsticks(&model.asian1,base);
 			updateModel(&model);
 			
 		

@@ -24,6 +24,7 @@ void render_asian_facing_left(const struct Model *model, UINT32 *base);
 void render_chopsticks_facing_right(const struct Chopstick *chopsticks, UINT16 *base);
 void render_chopsticks_facing_left(const struct Chopstick *chopsticks, UINT16 *base);
 void render_alive_chopsticks(const struct Asian *asian,int type,UINT16 *base);
+void unrender_alive_chopsticks(const struct Asian *asian,UINT16 *base);
 void clrBitmap32(UINT32 *base,int x, int y);
 void clrBitmap16(UINT16 *base, int x, int y);
 
