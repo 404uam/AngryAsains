@@ -20,6 +20,7 @@ int main()
 	plot_bitmap_32(base, 512, 32, trashcan_bitmap, TRASHCAN);
 	plot_bitmap_32(base, 416, 130, trashcan_bitmap, TRASHCAN);
 	plot_bitmap_32(base, 512, 224, trashcan_bitmap, TRASHCAN);
+	plot_bitmap_32(base, 256, 324, number3_bitmap, SCORE);
 
 	Cconin();
 
