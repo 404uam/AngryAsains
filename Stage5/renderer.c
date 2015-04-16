@@ -52,13 +52,13 @@ void render_score(UINT32 *base,struct Model *model)
 		}
 
 	clrBitmap32(base,480,344);
-	if(model->asian1.lives == 3){
+	if(model->asian2.lives == 3){
 		plot_bitmap_32((UINT32*)base,480,344,number3_bitmap, SCORE);
 		}
-	else if (model->asian1.lives == 2){
+	else if (model->asian2.lives == 2){
 		plot_bitmap_32((UINT32*)base,480,344,number2_bitmap, SCORE);
 		}
-	else if (model->asian1.lives == 1){
+	else if (model->asian2.lives == 1){
 		plot_bitmap_32((UINT32*)base,480,344,number1_bitmap, SCORE);
 		}
 
