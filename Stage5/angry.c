@@ -17,11 +17,10 @@ UINT32 getTime();
 UINT8 buffer[32256];
 UINT8 static_buffer[32256];
 
-
 int main()
 {
 	bool isBase = true;
-	void *back = ((UINT32*)buffer + 255) & 0xFFFFFF00;
+	void *back = 0xFFFFFF00 & (long)buffer;
 	void *background = static_buffer;
 	
 	void *base = Physbase();
@@ -30,14 +29,15 @@ int main()
 	long input;
 
 	modelType model = {{0,0,3,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
-					   {608,288,3,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
+					   {608,288,3,1,true,0,0,{{0,0,-1,1,false},{0,0,-1,1,false},{0,0,-1,1,false}}}, 
 					   {{96,32},{192,128},{96,224}},											
 					   {{512,32},{416,128},{512,224}},										
 					   {0,320}};
 					   
 	/*printf("/033f/n");*/
 	/*fflush(stdout);*/
-	
+
+	render_static_frame(background,&model);
 	render_static_frame(back,&model);
 	render_static_frame(base,&model);
 	render_asian_facing_right(&model,base);
@@ -110,6 +110,8 @@ int main()
 				Setscreen(-1,back,-1);
 				Vsync();
 
+				memcpy(base, background, 32256);
+
 				isBase = false;
 			} else {
 				unrender_alive_chopsticks(&model.asian1,base);
@@ -127,6 +129,8 @@ int main()
 
 				Setscreen(-1,base,-1);
 				Vsync();
+
+				memcpy(back, background, 32256);
 
 				isBase = true;
 			}
