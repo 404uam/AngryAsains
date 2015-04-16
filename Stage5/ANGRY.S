@@ -15,33 +15,35 @@ L2:
 	even
 _main:
 	link	a6,#-138
-	movem.l	d3/d4/d5/d6/d7,-(a7)
+	movem.l	d3/d4/d5/d6/d7/a3/a4,-(a7)
 	lea	-138(a6),a0
-	move.l	a0,d3
+	move.l	a0,d4
+	lea	-136(a6),a3
+	lea	_clrBitmap32,a4
 	;line	29
 	move.w	#2,-(a7)
 	jsr	__trap_14_w
 	addq.l	#2,a7
-	move.l	d0,d4
+	move.l	d0,d3
 	moveq	#-1,d7
 	lea	L1,a0
-	move.l	d3,a1
+	move.l	d4,a1
 	moveq	#28,d0
 L3:
 	move.l	(a0)+,(a1)+
 	dbra	d0,L3
 	;line	29
-	move.l	d4,-(a7)
+	move.l	d3,-(a7)
 	jsr	_render_static_frame
 	addq.l	#4,a7
 	;line	30
-	move.l	d4,-(a7)
 	move.l	d3,-(a7)
+	move.l	d4,-(a7)
 	jsr	_render_asian_facing_right
 	addq.l	#8,a7
 	;line	31
-	move.l	d4,-(a7)
 	move.l	d3,-(a7)
+	move.l	d4,-(a7)
 	jsr	_render_asian_facing_left
 	addq.l	#8,a7
 	;line	33
@@ -89,96 +91,126 @@ L4:
 	bra	L9
 L10:
 	;line	49
-	move.l	d3,-(a7)
+	move.l	d4,-(a7)
 	jsr	_asianMoveUp
 	addq.l	#4,a7
 	;line	50
+	move.w	(a3),-(a7)
+	move.l	d4,a0
+	move.w	(a0),-(a7)
+	move.l	d3,-(a7)
+	jsr	(a4)
+	addq.l	#8,a7
+	;line	51
 	bra	L8
 L11:
-	;line	52
-	move.l	d3,-(a7)
+	;line	53
+	move.l	d4,-(a7)
 	jsr	_asianMoveDown
 	addq.l	#4,a7
-	;line	53
+	;line	54
+	move.w	(a3),-(a7)
+	move.l	d4,a0
+	move.w	(a0),-(a7)
+	move.l	d3,-(a7)
+	jsr	(a4)
+	addq.l	#8,a7
+	;line	55
 	bra	L8
 L12:
-	;line	55
-	move.l	d3,-(a7)
+	;line	57
+	move.l	d4,-(a7)
 	jsr	_asianMoveLeft
 	addq.l	#4,a7
-	;line	56
-	bra	L8
-L13:
 	;line	58
+	move.w	(a3),-(a7)
+	move.l	d4,a0
+	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	_asianMoveRight
-	addq.l	#4,a7
+	jsr	(a4)
+	addq.l	#8,a7
 	;line	59
 	bra	L8
-L14:
+L13:
 	;line	61
-	move.w	#1,_time
+	move.l	d4,-(a7)
+	jsr	_asianMoveRight
+	addq.l	#4,a7
 	;line	62
+	move.w	(a3),-(a7)
+	move.l	d4,a0
+	move.w	(a0),-(a7)
+	move.l	d3,-(a7)
+	jsr	(a4)
+	addq.l	#8,a7
+	;line	63
+	bra	L8
+L14:
+	;line	65
+	move.l	d4,-(a7)
+	jsr	_asianThrowChopstick
+	addq.l	#4,a7
+	;line	66
 	bra	L8
 L15:
-	;line	64
+	;line	68
 	pea	L2
 	jsr	_printf
 	addq.l	#4,a7
-	;line	65
+	;line	69
 	moveq	#1,d7
 L9:
 L8:
 L7:
-	;line	72
+	;line	76
 	tst.l	-16(a6)
 	bls	L16
-	;line	74
-	move.l	d3,-(a7)
-	move.l	d3,-(a7)
-	jsr	_asianMoveModel
-	addq.l	#8,a7
 	;line	78
 	move.l	d4,-(a7)
-	move.l	d3,-(a7)
-	jsr	_render_asian_facing_right
-	addq.l	#8,a7
-	;line	79
 	move.l	d4,-(a7)
-	move.l	d3,-(a7)
-	jsr	_render_asian_facing_left
+	jsr	_asianMoveModel
 	addq.l	#8,a7
 	;line	81
+	move.l	d3,-(a7)
+	move.l	d4,-(a7)
+	jsr	_render_asian_facing_right
+	addq.l	#8,a7
+	;line	82
+	move.l	d3,-(a7)
+	move.l	d4,-(a7)
+	jsr	_render_asian_facing_left
+	addq.l	#8,a7
+	;line	84
 	move.l	d5,d6
 L16:
 L5:
 	cmp.w	#-1,d7
 	beq	L4
 L6:
-	;line	85
+	;line	88
 	moveq	#0,d0
 L17:
-	movem.l	-158(a6),d3/d4/d5/d6/d7
+	movem.l	-166(a6),d3/d4/d5/d6/d7/a3/a4
 	unlk	a6
 	rts
 _getTime:
 	link	a6,#-12
-	;line	92
+	;line	95
 	move.l	#1122,-4(a6)
-	;line	92
+	;line	95
 	pea	0
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
 	addq.l	#6,a7
 	move.l	d0,-12(a6)
-	;line	93
+	;line	96
 	move.l	-4(a6),a0
 	move.l	(a0),-8(a6)
-	;line	94
+	;line	97
 	move.l	-12(a6),-(a7)
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
-	;line	95
+	;line	98
 	move.l	-8(a6),d0
 L18:
 	unlk	a6

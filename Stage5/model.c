@@ -135,6 +135,7 @@ void asianThrowChopstick(struct Asian *asian)
 				spawnChopstick(&asian->chopsticks[i],asian);
 				canThrowChop = true;
 			}
+			i++;
 		}
 	}
 	
@@ -147,8 +148,9 @@ Purpose: Puts the chopstick to start where the asian is currently and then count
 
 void spawnChopstick(struct Chopstick *chopstick,struct Asian *asian)
 {
-	chopstick->x = asian->x;
-	chopstick->y = asian->y;
+	/* Addding 32 and 16 to shoot from the middle of the asian */
+	chopstick->x = asian->x + 32;
+	chopstick->y = asian->y + 16;
 	chopstick->isThrown = true;
 	
 	return;

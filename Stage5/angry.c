@@ -46,19 +46,23 @@ int main()
 			switch(input)
 			{
 				case UP:
-						asianMoveUp(&model.asian1);			
+						asianMoveUp(&model.asian1);		
+						clrBitmap32(base,model.asian1.x,model.asian1.y);
 						break;
 				case DOWN: 
 						asianMoveDown(&model.asian1);
+						clrBitmap32(base,model.asian1.x,model.asian1.y);
 						break;
 				case LEFT:
 						asianMoveLeft(&model.asian1);
+						clrBitmap32(base,model.asian1.x,model.asian1.y);
 						break;
 				case RIGHT:
 						asianMoveRight(&model.asian1);
+						clrBitmap32(base,model.asian1.x,model.asian1.y);
 						break;
 				case SPACE:
-						time = 1;
+						asianThrowChopstick(&model.asian1);
 						break;
 				case RETURN:
 						printf("OUT");
@@ -73,8 +77,7 @@ int main()
 		{
 			asianMoveModel(&model.asian1,&model);
 
-			/*clrBitmap32(base,model.asian1.x,model.asian1.y);
-			clrBitmap32(base,model.asian2.x,model.asian2.y);*/
+
 			render_asian_facing_right(&model,base);
 			render_asian_facing_left(&model,base);
 			

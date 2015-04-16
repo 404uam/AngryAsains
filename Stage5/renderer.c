@@ -69,6 +69,23 @@ void render_chopsticks_facing_right(const struct Chopstick *chopsticks, UINT16 *
 void render_chopsticks_facing_left(const struct Chopstick *chopsticks, UINT16 *base) {
     plot_bitmap_16(base, chopsticks->x, chopsticks->y, chopsticks_moving_left, CHOPSTICKS);
 }
+
+void render_alive_chopsticks(const struct Chopstick *chopsticks[3],int asian,UINT16 *base) {
+	int i;
+	for(i = 0; i < 3; i++)
+	{
+		if (chopsticks[i]->isThrown && asian == 1)
+		{
+			render_chopsticks_facing_right(chopsticks[i],base);
+		}
+		else
+		{
+			render_chopsticks_facing_left(chopsticks[i],base);
+		}
+	}
+	
+}
+
 /*
 	Name: clrBitmap32
 	Purpose: Clears a 32x32 bitmap given it's position and the base pointer.
