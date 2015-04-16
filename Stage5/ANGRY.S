@@ -18,8 +18,8 @@ _main:
 	movem.l	d3/d4/d5/d6/d7/a3/a4,-(a7)
 	lea	-138(a6),a0
 	move.l	a0,d4
-	lea	-136(a6),a3
-	lea	_clrBitmap32,a4
+	lea	_clrBitmap32,a3
+	lea	-136(a6),a4
 	;line	42
 	move.w	#2,-(a7)
 	jsr	__trap_14_w
@@ -95,11 +95,11 @@ L10:
 	jsr	_asianMoveUp
 	addq.l	#4,a7
 	;line	63
-	move.w	(a3),-(a7)
+	move.w	(a4),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	(a4)
+	jsr	(a3)
 	addq.l	#8,a7
 	;line	64
 	bra	L8
@@ -109,11 +109,11 @@ L11:
 	jsr	_asianMoveDown
 	addq.l	#4,a7
 	;line	67
-	move.w	(a3),-(a7)
+	move.w	(a4),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	(a4)
+	jsr	(a3)
 	addq.l	#8,a7
 	;line	68
 	bra	L8
@@ -123,11 +123,11 @@ L12:
 	jsr	_asianMoveLeft
 	addq.l	#4,a7
 	;line	71
-	move.w	(a3),-(a7)
+	move.w	(a4),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	(a4)
+	jsr	(a3)
 	addq.l	#8,a7
 	;line	72
 	bra	L8
@@ -137,11 +137,11 @@ L13:
 	jsr	_asianMoveRight
 	addq.l	#4,a7
 	;line	75
-	move.w	(a3),-(a7)
+	move.w	(a4),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	(a4)
+	jsr	(a3)
 	addq.l	#8,a7
 	;line	76
 	bra	L8
@@ -175,33 +175,39 @@ L7:
 	jsr	_ai
 	addq.l	#4,a7
 	;line	98
+	move.w	-92(a6),-(a7)
+	move.w	-94(a6),-(a7)
+	move.l	d3,-(a7)
+	jsr	(a3)
+	addq.l	#8,a7
+	;line	99
 	move.l	d4,-(a7)
 	jsr	_updateModel
 	addq.l	#4,a7
-	;line	102
+	;line	103
 	move.l	d3,-(a7)
 	move.w	#1,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_alive_chopsticks
 	lea	10(a7),a7
-	;line	103
+	;line	104
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_right
 	addq.l	#8,a7
-	;line	104
+	;line	105
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_left
 	addq.l	#8,a7
-	;line	112
+	;line	113
 	move.l	d5,d6
 L16:
 L5:
 	cmp.w	#-1,d7
 	beq	L4
 L6:
-	;line	116
+	;line	117
 	moveq	#0,d0
 L17:
 	movem.l	-166(a6),d3/d4/d5/d6/d7/a3/a4
@@ -209,22 +215,22 @@ L17:
 	rts
 _getTime:
 	link	a6,#-12
-	;line	123
+	;line	124
 	move.l	#1122,-4(a6)
-	;line	123
+	;line	124
 	pea	0
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
 	addq.l	#6,a7
 	move.l	d0,-12(a6)
-	;line	124
+	;line	125
 	move.l	-4(a6),a0
 	move.l	(a0),-8(a6)
-	;line	125
+	;line	126
 	move.l	-12(a6),-(a7)
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
-	;line	126
+	;line	127
 	move.l	-8(a6),d0
 L18:
 	unlk	a6
