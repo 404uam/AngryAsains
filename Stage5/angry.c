@@ -25,7 +25,9 @@ int main()
 					   {{512,32},{416,128},{512,224}},										
 					   {0,320}};
 					   
-
+	printf("/033f/n");
+	fflush(stdout);
+	
 	render_static_frame(base);
 	render_asian_facing_right(&model,base);
 	render_asian_facing_left(&model,base);

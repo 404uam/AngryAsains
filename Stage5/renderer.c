@@ -29,6 +29,7 @@ void render_static_frame(UINT8 *base) {
 	paintRgn((UINT32*)base,0,320,20,80);
 	plot_ver_line(base,320,0,640);
 	
+	render_initial_score((UINT32*)base);
 	plot_bitmap_32((UINT32*)base, 96, 32, trashcan_bitmap, TRASHCAN);
 	plot_bitmap_32((UINT32*)base, 192, 130, trashcan_bitmap, TRASHCAN);
 	plot_bitmap_32((UINT32*)base, 96, 224, trashcan_bitmap, TRASHCAN);
@@ -37,6 +38,20 @@ void render_static_frame(UINT8 *base) {
 	plot_bitmap_32((UINT32*)base, 512, 224, trashcan_bitmap, TRASHCAN);
 	
 }
+void render_initial_score(UINT32 *base)
+{
+	clrBitmap32(base,160,342);
+	plot_bitmap_32((UINT32*)base,160,342,number3_bitmap, SCORE);
+	clrBitmap32(base,128,342);
+	plot_bitmap_32((UINT32*)base,128,342,number2_bitmap, SCORE);
+	clrBitmap32(base,96,342);
+	plot_bitmap_32((UINT32*)base,96,342,number1_bitmap, SCORE);
+
+	clrBitmap32(base,480,342);
+	plot_bitmap_32((UINT32*)base,480,342,number3_bitmap, SCORE);
+
+}
+
 /*
 	Name: render_asian_facing_right
 	Purpose: Render the Asian bitmap that is looking right at the correct position

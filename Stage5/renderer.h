@@ -19,6 +19,7 @@ extern void clrRgn16(UINT16 *base,int x, int y, int width, int height);
 
 void render(const struct Model *model, UINT8 *base);
 void render_static_frame(UINT8 *base);
+void render_initial_score(UINT32 *base);
 void render_asian_facing_right(const struct Model *model, UINT32 *base);
 void render_asian_facing_left(const struct Model *model, UINT32 *base);
 void render_chopsticks_facing_right(const struct Chopstick *chopsticks, UINT16 *base);

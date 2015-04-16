@@ -10,8 +10,10 @@ L1:
 	dc.w	0,1,1,-1,96,32,192,128
 	dc.w	96,224,512,32,416,128,512,224
 	dc.w	0,320
-L2:
+L3:
 	dc.b	79,85,84,0
+L2:
+	dc.b	47,48,51,51,102,47,110,0
 	even
 _main:
 	link	a6,#-138
@@ -20,7 +22,7 @@ _main:
 	move.l	a0,d4
 	lea	-136(a6),a3
 	lea	_clrBitmap32,a4
-	;line	29
+	;line	28
 	move.w	#2,-(a7)
 	jsr	__trap_14_w
 	addq.l	#2,a7
@@ -29,200 +31,208 @@ _main:
 	lea	L1,a0
 	move.l	d4,a1
 	moveq	#28,d0
-L3:
+L4:
 	move.l	(a0)+,(a1)+
-	dbra	d0,L3
+	dbra	d0,L4
+	;line	28
+	pea	L2
+	jsr	_printf
+	addq.l	#4,a7
 	;line	29
+	pea	22+__iob
+	jsr	_fflush
+	addq.l	#4,a7
+	;line	31
 	move.l	d3,-(a7)
 	jsr	_render_static_frame
 	addq.l	#4,a7
-	;line	30
+	;line	32
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_right
 	addq.l	#8,a7
-	;line	31
+	;line	33
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_left
 	addq.l	#8,a7
-	;line	33
+	;line	35
 	jsr	_getTime
 	move.l	d0,d6
-	;line	35
-	bra	L5
-L4:
 	;line	37
+	bra	L6
+L5:
+	;line	39
 	jsr	_getTime
 	move.l	d0,d5
-	;line	38
+	;line	40
 	move.l	d5,d0
 	sub.l	d6,d0
 	move.l	d0,-16(a6)
-	;line	40
+	;line	42
 	pea	22+__iob
 	jsr	_fflush
 	addq.l	#4,a7
-	;line	42
+	;line	44
 	move.w	#11,-(a7)
 	jsr	__trap_1_w
 	addq.l	#2,a7
 	tst.w	d0
-	beq	L7
-	;line	44
+	beq	L8
+	;line	46
 	move.w	#8,-(a7)
 	jsr	__trap_1_w
 	addq.l	#2,a7
 	move.l	d0,-22(a6)
-	;line	46
+	;line	48
 	move.l	-22(a6),d0
 	sub.l	#1114231,d0
-	beq	L10
-	sub.l	#917500,d0
 	beq	L11
-	sub.l	#-65554,d0
+	sub.l	#917500,d0
 	beq	L12
-	sub.l	#131075,d0
+	sub.l	#-65554,d0
 	beq	L13
-	sub.l	#1638332,d0
+	sub.l	#131075,d0
 	beq	L14
-	sub.l	#-1900563,d0
+	sub.l	#1638332,d0
 	beq	L15
-	bra	L9
-L10:
-	;line	49
+	sub.l	#-1900563,d0
+	beq	L16
+	bra	L10
+L11:
+	;line	51
 	move.l	d4,-(a7)
 	jsr	_asianMoveUp
 	addq.l	#4,a7
-	;line	50
+	;line	52
 	move.w	(a3),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
 	jsr	(a4)
 	addq.l	#8,a7
-	;line	51
-	bra	L8
-L11:
 	;line	53
+	bra	L9
+L12:
+	;line	55
 	move.l	d4,-(a7)
 	jsr	_asianMoveDown
 	addq.l	#4,a7
-	;line	54
+	;line	56
 	move.w	(a3),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
 	jsr	(a4)
 	addq.l	#8,a7
-	;line	55
-	bra	L8
-L12:
 	;line	57
+	bra	L9
+L13:
+	;line	59
 	move.l	d4,-(a7)
 	jsr	_asianMoveLeft
 	addq.l	#4,a7
-	;line	58
+	;line	60
 	move.w	(a3),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
 	jsr	(a4)
 	addq.l	#8,a7
-	;line	59
-	bra	L8
-L13:
 	;line	61
+	bra	L9
+L14:
+	;line	63
 	move.l	d4,-(a7)
 	jsr	_asianMoveRight
 	addq.l	#4,a7
-	;line	62
+	;line	64
 	move.w	(a3),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
 	jsr	(a4)
 	addq.l	#8,a7
-	;line	63
-	bra	L8
-L14:
 	;line	65
+	bra	L9
+L15:
+	;line	67
 	move.l	d4,-(a7)
 	jsr	_asianThrowChopstick
 	addq.l	#4,a7
-	;line	66
-	bra	L8
-L15:
 	;line	68
-	pea	L2
+	bra	L9
+L16:
+	;line	70
+	pea	L3
 	jsr	_printf
 	addq.l	#4,a7
-	;line	69
+	;line	71
 	moveq	#1,d7
+L10:
 L9:
 L8:
-L7:
-	;line	76
-	tst.l	-16(a6)
-	bls	L16
 	;line	78
+	tst.l	-16(a6)
+	bls	L17
+	;line	80
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_unrender_alive_chopsticks
 	addq.l	#8,a7
-	;line	79
+	;line	81
 	move.l	d4,-(a7)
 	jsr	_updateModel
 	addq.l	#4,a7
-	;line	82
+	;line	84
 	move.l	d3,-(a7)
 	move.w	#1,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_alive_chopsticks
 	lea	10(a7),a7
-	;line	83
+	;line	85
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_right
 	addq.l	#8,a7
-	;line	84
+	;line	86
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_left
 	addq.l	#8,a7
-	;line	86
+	;line	88
 	move.l	d5,d6
-L16:
-L5:
-	cmp.w	#-1,d7
-	beq	L4
-L6:
-	;line	90
-	moveq	#0,d0
 L17:
+L6:
+	cmp.w	#-1,d7
+	beq	L5
+L7:
+	;line	92
+	moveq	#0,d0
+L18:
 	movem.l	-166(a6),d3/d4/d5/d6/d7/a3/a4
 	unlk	a6
 	rts
 _getTime:
 	link	a6,#-12
-	;line	97
+	;line	99
 	move.l	#1122,-4(a6)
-	;line	97
+	;line	99
 	pea	0
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
 	addq.l	#6,a7
 	move.l	d0,-12(a6)
-	;line	98
+	;line	100
 	move.l	-4(a6),a0
 	move.l	(a0),-8(a6)
-	;line	99
+	;line	101
 	move.l	-12(a6),-(a7)
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
-	;line	100
+	;line	102
 	move.l	-8(a6),d0
-L18:
+L19:
 	unlk	a6
 	rts
 	globl	_getTime
