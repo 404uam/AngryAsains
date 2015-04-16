@@ -2,6 +2,7 @@
 #include <osbind.h>
 #include <vt52.h>
 #include "TYPES.H"
+#include <string.h>
 
 #define RETURN	0x001C000DL
 #define LEFT 	0x001E0061L
@@ -12,8 +13,17 @@
 
 UINT32 getTime();
 
+/*
+UINT8 buffer[32256];
+UINT8 static_buffer[32256];
+*/
+
 int main()
 {
+	/*
+	void *back = buffer;
+	void *background = static_buffer;
+	*/
 	void *base = Physbase();
 	UINT32 timeThen, timeNow, timeElapsed;
 	bool quit = false;
@@ -25,9 +35,10 @@ int main()
 					   {{512,32},{416,128},{512,224}},										
 					   {0,320}};
 					   
-	printf("/033f/n");
-	fflush(stdout);
+	/*printf("/033f/n");*/
+	/*fflush(stdout);*/
 	
+	/*render_static_frame(back);*/
 	render_static_frame(base);
 	render_asian_facing_right(&model,base);
 	render_asian_facing_left(&model,base);
@@ -67,6 +78,10 @@ int main()
 						asianThrowChopstick(&model.asian1);
 						break;
 				case RETURN:
+				/*
+						Setscreen(-1,base,-1);
+						Vsync();
+				*/
 						printf("OUT");
 						quit = true;
 						break;
@@ -77,14 +92,23 @@ int main()
 
 		if (timeElapsed > 0)
 		{
+			/*memcpy(base, background, 32257);*/
 			unrender_alive_chopsticks(&model.asian1,base);
+			ai(&model);
 			updateModel(&model);
 			
-		
+
+
 			render_alive_chopsticks(&model.asian1,1,base);
 			render_asian_facing_right(&model,base);
 			render_asian_facing_left(&model,base);
-			
+
+
+			/*
+			Setscreen(-1,back,-1);
+			Vsync();
+			*/
+
 			timeThen = timeNow;
 		}
 	}
