@@ -29,8 +29,8 @@ int main()
 	bool quit = false;
 	long input;
 
-	modelType model = {{0,0,5,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
-					   {608,288,5,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
+	modelType model = {{0,0,3,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
+					   {608,288,3,1,true,0,0,{{0,0,1,1,false},{0,0,1,1,false},{0,0,1,1,false}}}, 
 					   {{96,32},{192,128},{96,224}},											
 					   {{512,32},{416,128},{512,224}},										
 					   {0,320}};
@@ -39,7 +39,7 @@ int main()
 	/*fflush(stdout);*/
 	
 	/*render_static_frame(back);*/
-	render_static_frame(base);
+	render_static_frame(base,&model);
 	render_asian_facing_right(&model,base);
 	render_asian_facing_left(&model,base);
 

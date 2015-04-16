@@ -23,13 +23,13 @@ void render(const struct Model *model, UINT8 *base) {
 	Input: UINT8 *base  - Base pointer for the screen.
 
 */
-void render_static_frame(UINT8 *base) {
+void render_static_frame(UINT8 *base,struct Model *model) {
 	
 	clrScrn((UINT32*)base);
 	paintRgn((UINT32*)base,0,320,20,80);
 	plot_ver_line(base,320,0,640);
 	
-	render_initial_score((UINT32*)base);
+	render_score((UINT32*)base,model);
 	plot_bitmap_32((UINT32*)base, 96, 32, trashcan_bitmap, TRASHCAN);
 	plot_bitmap_32((UINT32*)base, 192, 130, trashcan_bitmap, TRASHCAN);
 	plot_bitmap_32((UINT32*)base, 96, 224, trashcan_bitmap, TRASHCAN);
@@ -38,17 +38,30 @@ void render_static_frame(UINT8 *base) {
 	plot_bitmap_32((UINT32*)base, 512, 224, trashcan_bitmap, TRASHCAN);
 	
 }
-void render_initial_score(UINT32 *base)
+void render_score(UINT32 *base,struct Model *model)
 {
 	clrBitmap32(base,160,344);
-	plot_bitmap_32((UINT32*)base,160,344,number3_bitmap, SCORE);
-	clrBitmap32(base,128,344);
-	plot_bitmap_32((UINT32*)base,128,344,number2_bitmap, SCORE);
-	clrBitmap32(base,96,344);
-	plot_bitmap_32((UINT32*)base,96,344,number1_bitmap, SCORE);
+	
+	if(model->asian1.lives == 3){
+		plot_bitmap_32((UINT32*)base,160,344,number3_bitmap, SCORE);
+		}
+	else if (model->asian1.lives == 2){
+		plot_bitmap_32((UINT32*)base,160,344,number2_bitmap, SCORE);
+		}
+	else if (model->asian1.lives == 1){
+		plot_bitmap_32((UINT32*)base,160,344,number1_bitmap, SCORE);
+		}
 
 	clrBitmap32(base,480,344);
-	plot_bitmap_32((UINT32*)base,480,344,number3_bitmap, SCORE);
+	if(model->asian1.lives == 3){
+		plot_bitmap_32((UINT32*)base,480,344,number3_bitmap, SCORE);
+		}
+	else if (model->asian1.lives == 2){
+		plot_bitmap_32((UINT32*)base,480,344,number2_bitmap, SCORE);
+		}
+	else if (model->asian1.lives == 1){
+		plot_bitmap_32((UINT32*)base,480,344,number1_bitmap, SCORE);
+		}
 
 }
 
