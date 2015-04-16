@@ -13,16 +13,25 @@
 
 UINT32 getTime();
 
-
+/*
 UINT8 buffer[32256];
 UINT8 static_buffer[32256];
+<<<<<<< HEAD
 
 int main()
 {
 	bool isBase = true;
 	void *back = 0xFFFFFF00 & (long)buffer;
+=======
+*/
+
+int main()
+{
+	/*
+	void *back = buffer;
+>>>>>>> 5fd4022e6b2e5093c41696138dbfdbab027cff74
 	void *background = static_buffer;
-	
+	*/
 	void *base = Physbase();
 	UINT32 timeThen, timeNow, timeElapsed;
 	bool quit = false;
@@ -36,16 +45,21 @@ int main()
 					   
 	/*printf("/033f/n");*/
 	/*fflush(stdout);*/
+<<<<<<< HEAD
 
 	render_static_frame(background,&model);
 	render_static_frame(back,&model);
+=======
+	
+	/*render_static_frame(back);*/
+>>>>>>> 5fd4022e6b2e5093c41696138dbfdbab027cff74
 	render_static_frame(base,&model);
 	render_asian_facing_right(&model,base);
 	render_asian_facing_left(&model,base);
 
 	timeThen = getTime();
 	
-	while(quit == false) 
+	while(quit == false && gameOver(&model)==false) 
 	{
 		timeNow = getTime();
 		timeElapsed = timeNow - timeThen;
@@ -92,6 +106,7 @@ int main()
 
 		if (timeElapsed > 0)
 		{
+<<<<<<< HEAD
 
 			if(isBase == true) {
 				unrender_alive_chopsticks(&model.asian1,back);
@@ -120,28 +135,51 @@ int main()
 				clrBitmap32(base,model.asian2.x,model.asian2.y);
 				updateModel(&model);
 				
+=======
+			/*memcpy(base, background, 32257);*/
+			unrender_alive_chopsticks(&model.asian1,base);
+			unrender_alive_chopsticks(&model.asian2,base);
+			ai(&model);
+			clrBitmap32(base,model.asian2.x,model.asian2.y);
+			updateModel(&model);
+			
+>>>>>>> 5fd4022e6b2e5093c41696138dbfdbab027cff74
 
 
-				render_alive_chopsticks(&model.asian1,1,base);
-				render_alive_chopsticks(&model.asian2,2,base);
-				render_asian_facing_right(&model,base);
-				render_asian_facing_left(&model,base);
+			render_alive_chopsticks(&model.asian1,1,base);
+			render_alive_chopsticks(&model.asian2,2,base);
+			render_asian_facing_right(&model,base);
+			render_asian_facing_left(&model,base);
 
-				Setscreen(-1,base,-1);
-				Vsync();
 
+<<<<<<< HEAD
 				memcpy(back, background, 32256);
 
 				isBase = true;
 			}
 			/*memcpy(base, background, 32257);*/
 			
+=======
+			/*
+			Setscreen(-1,back,-1);
+			Vsync();
+			*/
+>>>>>>> 5fd4022e6b2e5093c41696138dbfdbab027cff74
 
 			timeThen = timeNow;
 		}
 	}
 
 	return 0;
+}
+
+bool gameOver(struct Model *model){
+	bool gameOver = false;
+	if(model->asian1.lives < 1 || model->asian2.lives < 1)
+	{	
+		gameOver = true;
+	}
+	return gameOver;
 }
 
 UINT32 getTime() {
