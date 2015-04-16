@@ -40,15 +40,15 @@ void render_static_frame(UINT8 *base) {
 }
 void render_initial_score(UINT32 *base)
 {
-	clrBitmap32(base,160,342);
-	plot_bitmap_32((UINT32*)base,160,342,number3_bitmap, SCORE);
-	clrBitmap32(base,128,342);
-	plot_bitmap_32((UINT32*)base,128,342,number2_bitmap, SCORE);
-	clrBitmap32(base,96,342);
-	plot_bitmap_32((UINT32*)base,96,342,number1_bitmap, SCORE);
+	clrBitmap32(base,160,344);
+	plot_bitmap_32((UINT32*)base,160,344,number3_bitmap, SCORE);
+	clrBitmap32(base,128,344);
+	plot_bitmap_32((UINT32*)base,128,344,number2_bitmap, SCORE);
+	clrBitmap32(base,96,344);
+	plot_bitmap_32((UINT32*)base,96,344,number1_bitmap, SCORE);
 
-	clrBitmap32(base,480,342);
-	plot_bitmap_32((UINT32*)base,480,342,number3_bitmap, SCORE);
+	clrBitmap32(base,480,344);
+	plot_bitmap_32((UINT32*)base,480,344,number3_bitmap, SCORE);
 
 }
 

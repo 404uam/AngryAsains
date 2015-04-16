@@ -268,9 +268,11 @@ void ai(struct Model *model)
 		asianThrowChopstick(&model->asian2);
 	}
 
+	/*
 	if(model->asian2.x - model->asian1.x > 200) {
 		asianMoveLeft(&model->asian2);
 	} else if(model->asian2.x - model->asian2.x < 200) {
 		asianMoveRight(&model->asian2);
 	}
+	*/
 }
