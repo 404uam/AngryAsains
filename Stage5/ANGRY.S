@@ -14,24 +14,36 @@ L2:
 	dc.b	79,85,84,0
 	even
 _main:
-	link	a6,#-138
-	movem.l	d3/d4/d5/d6/d7/a3/a4,-(a7)
-	lea	-138(a6),a0
+	link	a6,#-148
+	movem.l	d3/d4/d5/d6/d7/a3/a4/a5,-(a7)
+	lea	-148(a6),a0
 	move.l	a0,d4
-	lea	_clrBitmap32,a3
-	lea	-136(a6),a4
-	;line	42
+	moveq	#-1,d6
+	lea	-104(a6),a3
+	lea	_clrBitmap32,a4
+	lea	_render_alive_chopsticks,a5
+	;line	41
+	moveq	#1,d7
+	move.l	#_buffer,d0
+	add.l	#255,d0
+	and.l	#-256,d0
+	move.l	d0,d5
+	move.l	#_static_buffer,-10(a6)
 	move.w	#2,-(a7)
 	jsr	__trap_14_w
 	addq.l	#2,a7
 	move.l	d0,d3
-	moveq	#-1,d7
+	move.w	d6,-28(a6)
 	lea	L1,a0
 	move.l	d4,a1
 	moveq	#28,d0
 L3:
 	move.l	(a0)+,(a1)+
 	dbra	d0,L3
+	;line	41
+	move.l	d5,-(a7)
+	jsr	_render_static_frame
+	addq.l	#4,a7
 	;line	42
 	move.l	d3,-(a7)
 	jsr	_render_static_frame
@@ -48,17 +60,17 @@ L3:
 	addq.l	#8,a7
 	;line	46
 	jsr	_getTime
-	move.l	d0,d6
+	move.l	d0,-18(a6)
 	;line	48
 	bra	L5
 L4:
 	;line	50
 	jsr	_getTime
-	move.l	d0,d5
+	move.l	d0,-22(a6)
 	;line	51
-	move.l	d5,d0
-	sub.l	d6,d0
-	move.l	d0,-16(a6)
+	move.l	-22(a6),d0
+	sub.l	-18(a6),d0
+	move.l	d0,-26(a6)
 	;line	53
 	pea	22+__iob
 	jsr	_fflush
@@ -73,9 +85,9 @@ L4:
 	move.w	#8,-(a7)
 	jsr	__trap_1_w
 	addq.l	#2,a7
-	move.l	d0,-22(a6)
+	move.l	d0,-32(a6)
 	;line	59
-	move.l	-22(a6),d0
+	move.l	-32(a6),d0
 	sub.l	#1114231,d0
 	beq	L10
 	sub.l	#917500,d0
@@ -95,11 +107,11 @@ L10:
 	jsr	_asianMoveUp
 	addq.l	#4,a7
 	;line	63
-	move.w	(a4),-(a7)
+	move.w	-146(a6),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	(a3)
+	jsr	(a4)
 	addq.l	#8,a7
 	;line	64
 	bra	L8
@@ -109,11 +121,11 @@ L11:
 	jsr	_asianMoveDown
 	addq.l	#4,a7
 	;line	67
-	move.w	(a4),-(a7)
+	move.w	-146(a6),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	(a3)
+	jsr	(a4)
 	addq.l	#8,a7
 	;line	68
 	bra	L8
@@ -123,11 +135,11 @@ L12:
 	jsr	_asianMoveLeft
 	addq.l	#4,a7
 	;line	71
-	move.w	(a4),-(a7)
+	move.w	-146(a6),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	(a3)
+	jsr	(a4)
 	addq.l	#8,a7
 	;line	72
 	bra	L8
@@ -137,11 +149,11 @@ L13:
 	jsr	_asianMoveRight
 	addq.l	#4,a7
 	;line	75
-	move.w	(a4),-(a7)
+	move.w	-146(a6),-(a7)
 	move.l	d4,a0
 	move.w	(a0),-(a7)
 	move.l	d3,-(a7)
-	jsr	(a3)
+	jsr	(a4)
 	addq.l	#8,a7
 	;line	76
 	bra	L8
@@ -158,93 +170,178 @@ L15:
 	jsr	_printf
 	addq.l	#4,a7
 	;line	86
-	moveq	#1,d7
+	move.w	#1,-28(a6)
 L9:
 L8:
 L7:
 	;line	93
-	tst.l	-16(a6)
+	tst.l	-26(a6)
 	bls	L16
 	;line	96
-	move.l	d3,-(a7)
-	move.l	d4,-(a7)
-	jsr	_unrender_alive_chopsticks
-	addq.l	#8,a7
+	cmp.w	#1,d7
+	bne	L17
 	;line	97
-	move.l	d3,-(a7)
-	pea	-94(a6)
+	move.l	d5,-(a7)
+	move.l	d4,-(a7)
 	jsr	_unrender_alive_chopsticks
 	addq.l	#8,a7
 	;line	98
+	move.l	d5,-(a7)
+	move.l	a3,-(a7)
+	jsr	_unrender_alive_chopsticks
+	addq.l	#8,a7
+	;line	99
 	move.l	d4,-(a7)
 	jsr	_ai
 	addq.l	#4,a7
-	;line	99
-	move.w	-92(a6),-(a7)
-	move.w	-94(a6),-(a7)
-	move.l	d3,-(a7)
-	jsr	(a3)
-	addq.l	#8,a7
 	;line	100
+	move.w	-102(a6),-(a7)
+	move.w	(a3),-(a7)
+	move.l	d5,-(a7)
+	jsr	(a4)
+	addq.l	#8,a7
+	;line	101
 	move.l	d4,-(a7)
 	jsr	_updateModel
 	addq.l	#4,a7
-	;line	104
+	;line	105
+	move.l	d5,-(a7)
+	move.w	#1,-(a7)
+	move.l	d4,-(a7)
+	jsr	(a5)
+	lea	10(a7),a7
+	;line	106
+	move.l	d5,-(a7)
+	move.w	#2,-(a7)
+	move.l	a3,-(a7)
+	jsr	(a5)
+	lea	10(a7),a7
+	;line	107
+	move.l	d5,-(a7)
+	move.l	d4,-(a7)
+	jsr	_render_asian_facing_right
+	addq.l	#8,a7
+	;line	108
+	move.l	d5,-(a7)
+	move.l	d4,-(a7)
+	jsr	_render_asian_facing_left
+	addq.l	#8,a7
+	;line	110
+	move.w	d6,-(a7)
+	move.l	d5,-(a7)
+	move.l	d6,-(a7)
+	move.w	#5,-(a7)
+	jsr	__trap_14_wllw
+	lea	12(a7),a7
+	;line	111
+	move.w	#37,-(a7)
+	jsr	__trap_14_w
+	addq.l	#2,a7
+	;line	113
+	move.w	d6,d7
+	bra	L18
+L17:
+	;line	115
+	move.l	d3,-(a7)
+	move.l	d4,-(a7)
+	jsr	_unrender_alive_chopsticks
+	addq.l	#8,a7
+	;line	116
+	move.l	d3,-(a7)
+	move.l	a3,-(a7)
+	jsr	_unrender_alive_chopsticks
+	addq.l	#8,a7
+	;line	117
+	move.l	d4,-(a7)
+	jsr	_ai
+	addq.l	#4,a7
+	;line	118
+	move.w	-102(a6),-(a7)
+	move.w	(a3),-(a7)
+	move.l	d3,-(a7)
+	jsr	(a4)
+	addq.l	#8,a7
+	;line	119
+	move.l	d4,-(a7)
+	jsr	_updateModel
+	addq.l	#4,a7
+	;line	123
 	move.l	d3,-(a7)
 	move.w	#1,-(a7)
 	move.l	d4,-(a7)
-	jsr	_render_alive_chopsticks
+	jsr	(a5)
 	lea	10(a7),a7
-	;line	105
+	;line	124
 	move.l	d3,-(a7)
 	move.w	#2,-(a7)
-	pea	-94(a6)
-	jsr	_render_alive_chopsticks
+	move.l	a3,-(a7)
+	jsr	(a5)
 	lea	10(a7),a7
-	;line	106
+	;line	125
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_right
 	addq.l	#8,a7
-	;line	107
+	;line	126
 	move.l	d3,-(a7)
 	move.l	d4,-(a7)
 	jsr	_render_asian_facing_left
 	addq.l	#8,a7
-	;line	115
-	move.l	d5,d6
+	;line	128
+	move.w	d6,-(a7)
+	move.l	d3,-(a7)
+	move.l	d6,-(a7)
+	move.w	#5,-(a7)
+	jsr	__trap_14_wllw
+	lea	12(a7),a7
+	;line	129
+	move.w	#37,-(a7)
+	jsr	__trap_14_w
+	addq.l	#2,a7
+	;line	131
+	moveq	#1,d7
+L18:
+	;line	136
+	move.l	-22(a6),-18(a6)
 L16:
 L5:
-	cmp.w	#-1,d7
+	cmp.w	-28(a6),d6
 	beq	L4
 L6:
-	;line	119
+	;line	140
 	moveq	#0,d0
-L17:
-	movem.l	-166(a6),d3/d4/d5/d6/d7/a3/a4
+L19:
+	movem.l	-180(a6),d3/d4/d5/d6/d7/a3/a4/a5
 	unlk	a6
 	rts
 _getTime:
 	link	a6,#-12
-	;line	126
+	;line	147
 	move.l	#1122,-4(a6)
-	;line	126
+	;line	147
 	pea	0
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
 	addq.l	#6,a7
 	move.l	d0,-12(a6)
-	;line	127
+	;line	148
 	move.l	-4(a6),a0
 	move.l	(a0),-8(a6)
-	;line	128
+	;line	149
 	move.l	-12(a6),-(a7)
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
-	;line	129
+	;line	150
 	move.l	-8(a6),d0
-L18:
+L20:
 	unlk	a6
 	rts
 	globl	_getTime
+	bss
+_buffer:
+	ds.b	32256
+	globl	_buffer
+_static_buffer:
+	ds.b	32256
+	globl	_static_buffer
 	globl	_main
