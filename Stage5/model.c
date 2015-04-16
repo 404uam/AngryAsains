@@ -82,24 +82,24 @@ void asianMoveModel(struct Asian *asian,const struct Model *model)
 	else{
 		for(i = 0; i < 3; i++)		/* Checks through all the obstacles on the side*/
 			{
-				if( model->obs1[i].y == (asian->y + asian->ver_delta) &&
+				if( model->obs1[i].y == asian->y &&
 					asian->x + asian->hor_delta > model->obs1[i].x-32)
 					{
 						resetAsianDeltas(asian);
 					}
-				if(	model->obs1[i].y == (asian->y + asian->ver_delta) &&
+				if(	model->obs1[i].y == asian->y &&
 					asian->x + asian->hor_delta > model->obs1[i].x+32)
 					{
 						resetAsianDeltas(asian);
 					}
 				/*Are you trying to move DOWN into the trash?*/
-				if(	model->obs1[i].x == (asian->x + asian->hor_delta) &&
+				if(	model->obs1[i].x == asian->x &&
 					asian->y + asian->ver_delta > model->obs1[i].y-32)
 					{
 						resetAsianDeltas(asian);
 					}
 				/*Are you trying to move UP in to the trashcan??*/
-				if(	model->obs1[i].x == (asian->x + asian->hor_delta) &&
+				if(	model->obs1[i].x == asian->x &&
 					asian->y + asian->ver_delta < model->obs1[i].y+32)
 					{
 						resetAsianDeltas(asian);
