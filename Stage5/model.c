@@ -123,11 +123,11 @@ Purpose: Asian will throw the chopstick and have the checks if there are any ava
 */
 void asianThrowChopstick(struct Asian *asian)
 {
-	int i =0;
+	int i = 0;
 	bool canThrowChop = false;
 	if(asian->canThrow == true)
 	{
-		asian->canThrow = false;
+		/*asian->canThrow = false;*/
 		while(i<3 && canThrowChop == false)
 		{
 			if( asian->chopsticks[i].isThrown == false)
