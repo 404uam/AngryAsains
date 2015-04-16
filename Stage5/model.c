@@ -214,8 +214,22 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 	/* set isThrown to false so you can use it again */
 	if(chopstick->x + chopstick->direction*32 > SCREEN_WIDTH)
 	{
+		printf("hit border");
 		chopstick->isThrown = false;
 	}
+	else if((chopstick->x == model->asian1.x) && 
+		chopstick->y == model -> asian1.y)
+		{
+			chopstick->isThrown = false;
+			model -> asian1.lives -= 1;
+		}
+	else if ((chopstick->x == model->asian2.x) && 
+		chopstick->y == model -> asian2.y)
+		{
+			printf("hit ");
+			chopstick->isThrown = false;
+			model -> asian2.lives -= 1;
+		}
 	else
 	{
 		for(i = 0; i< 3; i++)
@@ -231,7 +245,6 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 				chopstick->isThrown = false;
 			}
 		}
-	
 	}
 	
 	return;
