@@ -233,15 +233,13 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 	if((chopstick->x >= model->asian1.x) && (chopstick->x <= model->asian1.x+32) &&
 		chopstick->y >= model -> asian1.y && (chopstick->y <= model->asian1.y+32) && (chopstick->direction == -1))
 		{
-			printf("I'm asian1");
 			chopstick->isThrown = false;
 			model -> asian1.lives -= 1;
 		}
 	/*Checks hit for player 2*/
 	if ((chopstick->x >= model->asian2.x) && (chopstick->x <= model->asian2.x+32) && 
-		chopstick->y >= model -> asian2.y&& (chopstick->y <= model->asian2.y+32))
+		chopstick->y >= model -> asian2.y&& (chopstick->y <= model->asian2.y+32)&& (chopstick->direction == 1))
 		{
-			printf("I'm asian2");
 			chopstick->isThrown = false;
 			model -> asian2.lives -= 1;
 		}
@@ -281,23 +279,25 @@ void updateModel(struct Model *model)
 */
 void ai(struct Model *model)
 {
+
 	if(model->asian1.y < model->asian2.y) {
 		asianMoveUp(&model->asian2);
 	} else if(model->asian1.y > model->asian2.y) {
 		asianMoveDown(&model->asian2);
 	}
-	if(model->asian2.x - model->asian1.x > 300) {
+	
+	if(model->asian2.x - model->asian1.x > 332)
+	{
 		asianMoveLeft(&model->asian2);
-	} else if(model->asian2.x - model->asian2.x < 300) {
+	}
+	else if (model->asian2.x - model->asian1.x < 300)
+	{
 		asianMoveRight(&model->asian2);
 	}
-
-	if(model->asian1.y+32 == model->asian2.y || model->asian1.y-32 == model->asian2.y)
-		asianThrowChopstick(&model->asian2);
+	
 	
 	if(model->asian1.y == model->asian2.y)
 		asianThrowChopstick(&model->asian2);
-
 
 	
 }

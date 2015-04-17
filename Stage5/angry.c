@@ -84,7 +84,6 @@ int main()
 						asianThrowChopstick(&model.asian1);
 						break;
 				case RETURN:
-						printf("OUT");
 						quit = true;
 						break;
 				default:
