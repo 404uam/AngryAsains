@@ -108,6 +108,8 @@ struct Notes noteChB[] ={
 	 
 	 currentIndex++;
 	 
+	 Super(old_ssp);
+	 
  }
  
  
