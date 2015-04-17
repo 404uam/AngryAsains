@@ -9,6 +9,8 @@
 
  #define QRTR_NOTE 25
  
+ #define LENGTH 39
+ 
  struct Note {
 	 int key;
 	 int duration;

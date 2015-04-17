@@ -1,6 +1,10 @@
 #include "PSG.H"
 #include "MUSIC.H"
 
+int currentIndex;
+int currentDuration;
+int currentTime;
+
 struct Note noteChA[] ={
 	{F,QRTR_NOTE,VOL},
 	{A,5,0},
@@ -93,13 +97,41 @@ struct Notes noteChB[] ={
 	 enable_channel(0,1,1);
 	 enable_channel(1,1,1);
 	 
+	 currentIndex = 0;
+	 currentDuration = 0;
+	 currentTime = 0;
+	 
+	 set_tone(0,noteChA[currentIndex].key);
+	 set_volume(0,noteChA[currentIndex].vol);
+	 set_tone(0,noteChB[currentIndex].key);
+	 set_volume(0,noteChB[currentIndex].vol);
+	 
+	 currentIndex++;
 	 
  }
  
  
  void update_music(UINT32 time_elapsed)
  {
+	 if(currentTime > noteChA[currentDuration].duration){
+		 currentIndex++;
+		 /*enable_channel(0,1,1);
+		 enable_channel(1,1,1);*/
+		 set_tone(0,noteChA[currentIndex].key);
+		 set_volume(0,noteChA[currentIndex].vol);
+		 set_tone(0,noteChB[currentIndex].key);
+		 set_volume(0,noteChB[currentIndex].vol);
+		 currentTime = 0;
+	 }
+	 else{
+		 currentTime++;
+	 }
 	 
+	 if(currentTime == LENGTH)
+	 {
+		 currentIndex = 0;
+		 currentTime = 0;
+	 }
 	 
 	 
 	 
