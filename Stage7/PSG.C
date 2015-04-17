@@ -1,4 +1,5 @@
 #include <osbind.h>
+#include "Types.h"
 
 void stop_sound();
 void write_select();

@@ -1,21 +1,24 @@
-#ifndef MODEL_H
-#define MODEL_H
-
+#ifndef	MODEL_H
 #include "types.h"
 
 #define RASTER_H
 #define bool int
 #define true 1
 #define false -1
+#define MIDDLEOFSCREEN 320
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 400
 
-struct Chopstick {
+extern int time;
+
+struct Chopstick{
 	UINT16 x,y;
 	int direction;
 	int speed;
 	bool isThrown;
 };
 
-struct Asian {
+struct Asian{
 	UINT16 x,y,lives;
 	int speed;
 	bool canThrow;
@@ -24,22 +27,22 @@ struct Asian {
 	struct Chopstick chopsticks[3];
 };
 
-struct Obstruction {
+struct Obstruction{
 	UINT16 x,y;
 };
 
-struct PlayerInfo {
+struct PlayerInfo{
 	UINT16 x,y;
 };
 
-struct Model {
+struct Model
+{
 	struct Asian asian1;
 	struct Asian asian2;
 	struct Obstruction obs1[3];
 	struct Obstruction obs2[3];
 	struct PlayerInfo pi;
 };
-
 typedef struct Model modelType;
 
 void resetAsianDeltas(struct Asian *asian);
@@ -47,11 +50,16 @@ void asianMoveRight(struct Asian *asian);
 void asianMoveLeft(struct Asian *asian);
 void asianMoveUp(struct Asian *asian);
 void asianMoveDown(struct Asian *asian);
-void asianMoveModel(struct Asian *asian);
+void asianMoveModel(struct Asian *asian,const struct Model *model, int type);
 void asianThrowChopstick(struct Asian *asian);
 
 void spawnChopstick(struct Chopstick *chopstick, struct Asian *asian);
-void chopstickMove(struct Chopstick *chopstick);
+void chopstickMove(struct Chopstick *chopstick,struct Model *model);
+void moveAliveChopsticks(struct Asian *asian,struct Model *model);
+
+
+void updateModel(struct Model *model);
+void ai(struct Model *model);
 
 
 #endif

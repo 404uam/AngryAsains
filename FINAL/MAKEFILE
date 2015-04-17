@@ -1,11 +1,25 @@
-tst_rast: tst_rast.o raster.o bitmaps.o
-	cc68x -g tst_rast.o raster.o bitmaps.o -o tst_rast
+all: clean angry
 
-tst_rast.o: tst_rast.c raster.h
-	cc68x -g -c tst_rast.c
+angry: angry.o model.o events.o bitmaps.o raster.o renderer.o 
+	cc68x -g angry.o model.o events.o bitmaps.o raster.o renderer.o -o angry
 
+angry.o: angry.c angry.h
+	cc68x -g -c angry.c
+
+renderer.o: renderer.c renderer.h
+	cc68x -g -c renderer.c
+	
+model.o: model.c model.h
+	cc68x -g -c model.c
+
+events.o: events.c events.h
+	cc68x -g -c events.c
+
+bitmaps.o: bitmaps.c bitmaps.h
+	cc68x -g -c bitmaps.c
+	
 raster.o: raster.c raster.h
 	cc68x -g -c raster.c
 	
-bitmaps.o: bitmaps.c bitmaps.h
-	cc68x -g -c bitmaps.c
+clean:
+	$(RM) *.o *.i tst_rend
