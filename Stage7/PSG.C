@@ -1,11 +1,23 @@
 #include "psg.h"
 #include <osbind.h>
-#include "Types.h"
+#include "types.h"
+
+void write_psg(int reg, UINT8 val);
+void set_tone(int channel, int tuning);
+void set_volume(int channel, int volume);
+void enable_channel(int channel, int tone_on, int noise_on);
+void stop_sound();
+
+extern volatile char *PSG_reg_select = 0xFF8800;
+extern volatile char *PSG_reg_write  = 0xFF8802;
 
 int main()
 {
 	long old_ssp = Super(0);
 
+
+	/* Gun shot */
+	/*
 	write_psg(6,0x0F);	
 	write_psg(7,0x07);
 	write_psg(8,0x10);			
@@ -13,6 +25,18 @@ int main()
 	write_psg(0xA,0x10);
 	write_psg(0xC,0x10);	
 	write_psg(0xD,0x00);	
+	*/
+
+	/* Explosion */
+	/*
+	write_psg(6,0x1F);	
+	write_psg(7,0x07);
+	write_psg(8,0x10);			
+	write_psg(9,0x10);
+	write_psg(0xA,0x10);
+	write_psg(0xC,0x38);	
+	write_psg(0xD,0x00);
+	*/
 
 	while (!Cconis())
 		;
@@ -57,7 +81,6 @@ void enable_channel(int channel, int tone_on, int noise_on) {
 			write_psg(7,0x37);
 		} else
 			write_psg(7,0x3E);
-		}
 	} else if(channel == 1) {
 		if(tone_on == 1 && noise_on == 1) {
 			write_psg(7,0x2D);
@@ -65,7 +88,7 @@ void enable_channel(int channel, int tone_on, int noise_on) {
 			write_psg(7,0x2F);
 		} else
 			write_psg(7,0x3D);
-		}
+	
 	} else {
 		if(tone_on == 1 && noise_on == 1) {
 			write_psg(7,0x1B);
@@ -73,7 +96,6 @@ void enable_channel(int channel, int tone_on, int noise_on) {
 			write_psg(7,0x1F);
 		} else
 			write_psg(7,0x3B);
-		}
 	}
 }
 

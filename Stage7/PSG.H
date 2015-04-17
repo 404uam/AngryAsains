@@ -7,7 +7,4 @@ void set_volume(int channel, int volume);
 void enable_channel(int channel, int tone_on, int noise_on);
 void stop_sound();
 
-extern volatile char *PSG_reg_select = 0xFF8800;
-extern volatile char *PSG_reg_write  = 0xFF8802;
-
 #endif

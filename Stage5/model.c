@@ -285,9 +285,8 @@ void ai(struct Model *model)
 	} else if(model->asian1.y > model->asian2.y) {
 		asianMoveDown(&model->asian2);
 	}
-	
-	if(model->asian2.x - model->asian1.x > 332)
-	{
+
+	if(model->asian2.x - model->asian1.x > 332) {
 		asianMoveLeft(&model->asian2);
 	}
 	else if (model->asian2.x - model->asian1.x < 300)
