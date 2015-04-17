@@ -1,5 +1,15 @@
+/*
+	Name: RASTER.C
+	Author:Louis Mau, Chris Mah
+	Purpose: Raster library to plot to the screen. Contains general functions to draw to screen.
+
+*/
 #include "raster.h"
 
+/*
+	Name: clrScrn
+	Purpose: Clears the screen
+*/
 void clrScrn(UINT32 *base)
 {
 	int i;
@@ -10,7 +20,10 @@ void clrScrn(UINT32 *base)
 		*(base + i) &= 0;
 	}
 }
-
+/*
+	Name: plot_bitmap_16
+	Purpose: plots a 16 x 16 bit map
+*/
 void plot_bitmap_16(UINT16 *base, int x, int y, const UINT16 *bitmap, unsigned int height) {
 	int i;
 	int offset = x % 16;
@@ -28,7 +41,10 @@ void plot_bitmap_16(UINT16 *base, int x, int y, const UINT16 *bitmap, unsigned i
 		}
 	}
 }
-
+/*
+	Name: plot_bitmap_32
+	Purpose: plots a 32x32 bit map
+*/
 void plot_bitmap_32(UINT32 *base, int x, int y, const UINT32 *bitmap, unsigned int height) {
 	int i;
 	int offset = x % 32;
@@ -46,7 +62,10 @@ void plot_bitmap_32(UINT32 *base, int x, int y, const UINT32 *bitmap, unsigned i
 		}
 	}
 }
-
+/*
+	Name: plot_ver_line
+	Purpose: plots a vertical line
+*/
 void plot_ver_line(UINT8 *base, int x, int y, int length)
 {
 	int i;
@@ -65,7 +84,10 @@ void plot_ver_line(UINT8 *base, int x, int y, int length)
 	}
 
 }
-
+/*
+	Name: paintRgn
+	Purpose: Paints a region black. Pick a x y to start and paint from there.
+*/
 void paintRgn(UINT32 *base,int x, int y, int width, int height)
 {
 	int i;
@@ -83,7 +105,10 @@ void paintRgn(UINT32 *base,int x, int y, int width, int height)
 		}
 	}
 }
-
+/*
+	Name: clrRgn32
+	Purpose: Clears a 32 x 32 bitmap 
+*/
 void clrRgn32(UINT32 *base,int x, int y, int width, int height)
 {
 	int i;
@@ -101,7 +126,10 @@ void clrRgn32(UINT32 *base,int x, int y, int width, int height)
 		}
 	}
 }
-
+/*
+	Name: clrRgn16
+	Purpose: clears a 16 x 16 bitmap region.
+*/
 void clrRgn16(UINT16 *base,int x, int y, int width, int height)
 {
 	int i;

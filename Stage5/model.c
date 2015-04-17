@@ -68,10 +68,12 @@ Purpose: actually update the model by adding the deltas
 void asianMoveModel(struct Asian *asian,const struct Model *model,int type)
 {
 	int i;
-	/* TODO COLLISION DETECTION */
-	/*Checks middle line of screen */
+	
+	/* Checks type of asian being passed in 1 == player facing right
+											* == player facing left*/
 	if(type == 1) 
 	{
+		/*Checks middle line of screen */
 		if(asian->x + asian->hor_delta > (MIDDLEOFSCREEN-32))
 		{
 			resetAsianDeltas(asian);
@@ -84,25 +86,25 @@ void asianMoveModel(struct Asian *asian,const struct Model *model,int type)
 		else{
 			for(i = 0; i < 3; i++)		/* Checks through all the obstacles on the side*/
 				{
-					/*Are you trying to move RIGHT in to the trash*/
+					/*Are you trying to move RIGHT in to the trash and are you to the left of it?*/
 					if( model->obs1[i].y == (asian->y+ asian->ver_delta)  && model->obs1[i].x-32 == asian->x &&
 						asian->x + asian->hor_delta > model->obs1[i].x-32)
 						{
 							resetAsianDeltas(asian);
 						}
-					/*Are you trying to move LEFT into the trash?*/	
+					/*Are you trying to move LEFT into the trash? and are you to the right of it?*/	
 					if(	model->obs1[i].y == (asian->y + asian->ver_delta)  && model->obs1[i].x+32 == asian->x &&
 						asian->x + asian->hor_delta < model->obs1[i].x+32)
 						{
 							resetAsianDeltas(asian);
 						}
-					/*Are you trying to move DOWN into the trash?*/
+					/*Are you trying to move DOWN into the trash? and are you on top of it*/
 					if(	model->obs1[i].x == (asian->x + asian->hor_delta) && model->obs1[i].y-32 == asian->y &&
 						asian->y + asian->ver_delta > model->obs1[i].y-32)
 						{
 							resetAsianDeltas(asian);
 						}
-					/*Are you trying to move UP in to the trashcan??*/
+					/*Are you trying to move UP in to the trashcan??and are you under it*/
 					if(	model->obs1[i].x == (asian->x + asian->hor_delta) && model->obs1[i].y+32 == asian->y &&
 						asian->y + asian->ver_delta < model->obs1[i].y+32)
 						{
@@ -112,6 +114,7 @@ void asianMoveModel(struct Asian *asian,const struct Model *model,int type)
 				}
 			}
 	} else {
+		/*Checks middle line of screen */
 		if(asian->x + asian->hor_delta < (MIDDLEOFSCREEN+32))
 		{
 			resetAsianDeltas(asian);
@@ -152,7 +155,7 @@ void asianMoveModel(struct Asian *asian,const struct Model *model,int type)
 				}
 			}
 	}
-	
+	/*Add the deltas to the position*/
 	asian->x += asian->hor_delta*32;
 	asian->y += asian->ver_delta*32;
 	
@@ -170,7 +173,6 @@ void asianThrowChopstick(struct Asian *asian)
 	bool canThrowChop = false;
 	if(asian->canThrow == true)
 	{
-		/*asian->canThrow = false;*/
 		while(i<3 && canThrowChop == false)
 		{
 			if( asian->chopsticks[i].isThrown == false)
@@ -208,10 +210,7 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 	int i;
 	chopstick->x += chopstick->direction*16;
 	
-	/* Collision detection todo*/
-	/*Peusdo code*/
-	/* if collide with anything ...*/
-	/* set isThrown to false so you can use it again */
+	/* Check all the trash cans in the game see if collisions happen*/
 	for(i = 0; i< 3; i++)
 		{
 			if(chopstick->x + chopstick->direction*16 == model->obs1[i].x &&
@@ -225,11 +224,12 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 				chopstick->isThrown = false;
 			}
 		}
-		
+	/*Checks out of bounds for chopstick going -> */
 	if(chopstick->x + chopstick->direction*16 > SCREEN_WIDTH)
 	{
 		chopstick->isThrown = false;
 	}
+	/*Checks self hitting chopstick and if it's a hit to player 1*/
 	if((chopstick->x >= model->asian1.x) && (chopstick->x <= model->asian1.x+32) &&
 		chopstick->y >= model -> asian1.y && (chopstick->y <= model->asian1.y+32) && (chopstick->direction == -1))
 		{
@@ -237,6 +237,7 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 			chopstick->isThrown = false;
 			model -> asian1.lives -= 1;
 		}
+	/*Checks hit for player 2*/
 	if ((chopstick->x >= model->asian2.x) && (chopstick->x <= model->asian2.x+32) && 
 		chopstick->y >= model -> asian2.y&& (chopstick->y <= model->asian2.y+32))
 		{
@@ -247,7 +248,10 @@ void chopstickMove(struct Chopstick *chopstick,struct Model *model)
 	
 	return;
 }
-
+/*
+	Name: moveAliveChopsticks
+	Purpose: Loop through the chopsticks that are currently in the air being thrown.
+*/
 void moveAliveChopsticks(struct Asian *asian,struct Model *model)
 {
 	int i;
@@ -260,7 +264,10 @@ void moveAliveChopsticks(struct Asian *asian,struct Model *model)
 		}
 	}
 }
-
+/*
+	Name: updateModel
+	Purpose: update the structs in the model with one simple function
+*/
 void updateModel(struct Model *model)
 {
 	asianMoveModel(&model->asian1,model,1);
@@ -268,7 +275,10 @@ void updateModel(struct Model *model)
 	moveAliveChopsticks(&model->asian1,model);
 	moveAliveChopsticks(&model->asian2,model);
 }
-
+/*
+	Name: ai
+	Purpose: Detail what the AI opponent will do.
+*/
 void ai(struct Model *model)
 {
 	if(model->asian1.y < model->asian2.y) {
@@ -276,14 +286,18 @@ void ai(struct Model *model)
 	} else if(model->asian1.y > model->asian2.y) {
 		asianMoveDown(&model->asian2);
 	}
+	if(model->asian2.x - model->asian1.x > 300) {
+		asianMoveLeft(&model->asian2);
+	} else if(model->asian2.x - model->asian2.x < 300) {
+		asianMoveRight(&model->asian2);
+	}
 
 	if(model->asian1.y+32 == model->asian2.y || model->asian1.y-32 == model->asian2.y)
 		asianThrowChopstick(&model->asian2);
-	/*
-	if(model->asian2.x - model->asian1.x > 200) {
-		asianMoveLeft(&model->asian2);
-	} else if(model->asian2.x - model->asian2.x < 200) {
-		asianMoveRight(&model->asian2);
-	}
-	*/
+	
+	if(model->asian1.y == model->asian2.y)
+		asianThrowChopstick(&model->asian2);
+
+
+	
 }
